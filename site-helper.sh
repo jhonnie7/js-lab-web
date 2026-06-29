@@ -1,81 +1,202 @@
 #!/bin/bash
 
-echo "========================================"
-echo "  JS-LAB.UK — SITE HELPER"
-echo "========================================"
-echo ""
-echo "📁 LOCATION"
-echo "  /opt/js-lab-web/"
-echo "  Files: index.html, js-lab-logo-round.png"
-echo ""
-echo "🚀 DEPLOY WORKFLOW"
-echo "  1. Edit index.html via python3 replace"
-echo "  2. git add index.html && git commit -m 'msg' && git push"
-echo "  3. Cloudflare Pages auto-deploys on push"
-echo "  4. Live at: https://js-lab.uk"
-echo ""
-echo "========================================"
-echo "  CURRENT HTML STRUCTURE"
-echo "========================================"
-echo ""
-echo "── STATUS BAR (top fixed bar)"
-grep -o 'SYSTEMS ONLINE\|JS-LAB.UK\|SECURE · DEPLOY · MONITOR' index.html | head -3
-echo ""
-echo "── HERO SECTION"
-echo "  Logo: $(grep -o 'src="[^"]*"' index.html | head -1)"
-echo "  Logo size: $(grep -o 'width: [0-9]*px; height: [0-9]*px' index.html | head -1)"
-echo "  Title: JS-LAB"
-echo "  Subtitle: INFRASTRUCTURE LAB"
-echo "  Pills: SECURE · DEPLOY · MONITOR"
-echo ""
-echo "── WHOAMI TERMINAL (// ABOUT)"
-echo "  Keys present:"
-grep -o 't-key">[^<]*' index.html | sed 's/t-key">/  · /'
-echo ""
-echo "── TECH STACK (// TECH STACK)"
-echo "  Cards present:"
-grep -o 'stack-name">[^<]*' index.html | sed 's/stack-name">/  · /'
-echo ""
-echo "── WRITING (// WRITING)"
-grep -o 'href="https://github[^"]*\|href="https://www.linkedin[^"]*' index.html | sed 's/href="//;s/"//' | sed 's/^/  · /'
-echo ""
-echo "── CONNECT (// CONNECT)"
+SITE_DIR="/opt/js-lab-web"
+cd "$SITE_DIR" || exit 1
 
-echo ""
-echo "── FOOTER"
-grep -o '© [^<]*' index.html
-echo ""
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+status() {
+
+echo
 echo "========================================"
-echo "  EDIT PATTERNS"
+echo " JS-LAB WEBSITE STATUS"
 echo "========================================"
-echo ""
-echo "PYTHON REPLACE TEMPLATE:"
-echo '  cd /opt/js-lab-web && python3 << PYEOF'
-echo '  content = open("index.html").read()'
-echo '  content = content.replace('
-echo '      "OLD STRING",'
-echo '      "NEW STRING"'
-echo '  )'
-echo '  open("index.html", "w").write(content)'
-echo '  print("Done")'
-echo '  PYEOF'
-echo '  git add index.html && git commit -m "msg" && git push'
-echo ""
-echo "LOGO BG REMOVAL TEMPLATE:"
-echo '  python3 -c "'
-echo '  from PIL import Image; import numpy as np'
-echo '  img = Image.open(\"js-lab-logo-round.png\").convert(\"RGBA\")'
-echo '  data = np.array(img)'
-echo '  r,g,b,a = data[:,:,0],data[:,:,1],data[:,:,2],data[:,:,3]'
-echo '  mask = (r < THRESHOLD) & (g < THRESHOLD) & (b < THRESHOLD)'
-echo '  data[mask,3] = 0'
-echo '  Image.fromarray(data).save(\"js-lab-logo-round.png\")'
-echo '  "'
-echo ""
-echo "========================================"
-echo "  GIT STATUS"
-echo "========================================"
-git status
-echo ""
+echo
+
+echo -e "${BLUE}Location:${NC} $SITE_DIR"
+echo
+
+echo -e "${BLUE}Files${NC}"
+ls -lh
+
+echo
+
+echo -e "${BLUE}Git${NC}"
+git status --short
+echo
+
+echo "Branch : $(git branch --show-current)"
+echo "Commit : $(git rev-parse --short HEAD)"
+
+echo
+
+echo -e "${BLUE}Last commits${NC}"
 git log --oneline -5
-echo ""
+
+echo
+
+echo -e "${BLUE}HTML${NC}"
+
+python3 <<'PYEOF'
+from pathlib import Path
+import re
+
+html = Path("index.html").read_text()
+
+print("Sections :", html.count("<section"))
+print("Images   :", html.count("<img"))
+print("Links    :", html.count("<a "))
+print("Size     :", len(html), "bytes")
+PYEOF
+
+echo
+
+echo -e "${BLUE}Required files${NC}"
+
+for f in index.html js-lab-logo-round.png site-helper.sh
+do
+    if [[ -f "$f" ]]; then
+        echo -e "${GREEN}✓${NC} $f"
+    else
+        echo -e "${RED}✗${NC} $f"
+    fi
+done
+
+echo
+}
+
+backup() {
+
+mkdir -p backups
+
+FILE="backups/index-$(date +%F-%H%M%S).html"
+
+cp index.html "$FILE"
+
+echo -e "${GREEN}Backup created:${NC}"
+echo "$FILE"
+
+}
+
+deploy() {
+
+git add .
+
+git commit -m "${1:-Website update}"
+
+git push
+
+}
+
+replace() {
+
+python3 <<PYEOF
+from pathlib import Path
+
+old = """$1"""
+new = """$2"""
+
+p = Path("index.html")
+
+html = p.read_text()
+
+count = html.count(old)
+
+html = html.replace(old,new)
+
+p.write_text(html)
+
+print(f"Replaced {count} occurrence(s).")
+PYEOF
+
+}
+
+
+mobile()
+
+{
+
+echo "Applying mobile optimization..."
+
+# backup first
+mkdir -p backups
+cp index.html "backups/index-mobile-$(date +%F-%H%M%S).html"
+
+python3 <<'PY'
+from pathlib import Path
+
+html = Path("index.html").read_text()
+
+# inject mobile CSS if not exists
+if "MOBILE-FIX" not in html:
+    fix = """
+<style id="MOBILE-FIX">
+@media (max-width: 768px), (pointer: coarse) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .hero, .container {
+        transform: none !important;
+        filter: none !important;
+    }
+}
+</style>
+"""
+    html = html.replace("</head>", fix + "\n</head>")
+
+Path("index.html").write_text(html)
+
+print("Mobile patch applied")
+PY
+}
+
+
+help_menu() {
+
+echo
+echo "JS-LAB Helper"
+echo
+echo "Usage:"
+echo
+echo "./site-helper.sh status"
+echo "./site-helper.sh backup"
+echo "./site-helper.sh deploy \"message\""
+echo "./site-helper.sh replace \"OLD\" \"NEW\""
+echo
+
+}
+
+case "$1" in
+
+status)
+status
+;;
+
+backup)
+backup
+;;
+
+deploy)
+shift
+deploy "$*"
+;;
+
+replace)
+replace "$2" "$3"
+;;
+
+mobile)
+mobile
+;;
+
+*)
+help_menu
+;;
+
+esac
