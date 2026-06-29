@@ -99,7 +99,7 @@ section { position: relative; z-index: 1; padding: 5rem 2rem; max-width: 860px; 
 .contact-btn svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
 footer { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; padding: 1rem; border-top: 1px solid rgba(0,229,255,0.1); background: rgba(5,10,14,0.8); backdrop-filter: blur(10px); font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: rgba(140,160,176,0.5); letter-spacing: 0.1em; }
 @media (max-width: 480px) { .logo-wrap { width: 200px; height: 200px; } .status-bar { font-size: 0.6rem; padding: 0.6rem 1rem; } .stack-grid { grid-template-columns: repeat(2, 1fr); } .contact-row { flex-direction: column; } }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; } }
+ }
 </style>
 
 
@@ -132,6 +132,24 @@ footer { position: relative; z-index: 1; display: flex; align-items: center; jus
 </style>
 
 
+
+
+<style id="MOBILE-ANIMATION-FIX">
+@media (max-width: 768px), (pointer: coarse) {
+
+    /* allow animations but make them lighter */
+    * {
+        animation-duration: 1.5s !important;
+        animation-fill-mode: both !important;
+    }
+
+    /* ensure transforms still work */
+    .hero, .floating, .float {
+        animation-play-state: running !important;
+    }
+
+}
+</style>
 
 </head>
 <body>
