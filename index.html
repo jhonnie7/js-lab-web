@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JS-LAB | Infrastructure Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cyan: #00e5ff;
+      --cyan-dim: rgba(0, 229, 255, 0.15);
+      --cyan-glow: rgba(0, 229, 255, 0.4);
+      --dark: #050a0e;
+      --steel: #8ca0b0;
+      --white: #e8f4f8;
+    }
+    html, body { height: 100%; background: var(--dark); color: var(--white); font-family: 'Rajdhani', sans-serif; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px); background-size: 60px 60px; z-index: 0; animation: gridShift 20s linear infinite; }
+    @keyframes gridShift { 0% { background-position: 0 0; } 100% { background-position: 60px 60px; } }
+    body::after { content: ''; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -60%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,229,255,0.06) 0%, transparent 70%); z-index: 0; pointer-events: none; }
+    .container { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; gap: 2rem; }
+    .status-bar { position: fixed; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 2rem; border-bottom: 1px solid rgba(0,229,255,0.1); background: rgba(5,10,14,0.8); backdrop-filter: blur(10px); font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--steel); z-index: 100; }
+    .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); display: inline-block; margin-right: 0.4rem; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 4px var(--cyan); } 50% { opacity: 0.4; box-shadow: none; } }
+    .logo-wrap { position: relative; width: 280px; height: 280px; display: flex; align-items: center; justify-content: center; animation: floatY 6s ease-in-out infinite; }
+    @keyframes floatY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+    .logo-wrap::before { content: ''; position: absolute; inset: -20px; border-radius: 50%; background: radial-gradient(circle, var(--cyan-glow) 0%, transparent 70%); animation: glowPulse 3s ease-in-out infinite; }
+    @keyframes glowPulse { 0%, 100% { opacity: 0.6; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } }
+    .logo-wrap img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 20px var(--cyan-glow)); position: relative; z-index: 1; }
+    .scan-ring { position: absolute; inset: -30px; border-radius: 50%; border: 1px solid transparent; border-top-color: var(--cyan); animation: spin 4s linear infinite; }
+    .scan-ring-2 { position: absolute; inset: -45px; border-radius: 50%; border: 1px solid transparent; border-bottom-color: rgba(0,229,255,0.4); animation: spin 7s linear infinite reverse; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .title-block { text-align: center; animation: fadeUp 1s ease 0.3s both; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .title-block h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 700; letter-spacing: 0.3em; color: var(--white); text-shadow: 0 0 30px var(--cyan-glow); line-height: 1; }
+    .title-block h1 span { color: var(--cyan); }
+    .subtitle { font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; letter-spacing: 0.25em; color: var(--steel); margin-top: 0.5rem; }
+    .divider { display: flex; align-items: center; gap: 1rem; width: 100%; max-width: 400px; animation: fadeUp 1s ease 0.5s both; }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--cyan-dim), transparent); }
+    .divider span { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--cyan); letter-spacing: 0.2em; }
+    .pills { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; animation: fadeUp 1s ease 0.7s both; }
+    .pill { padding: 0.4rem 1.2rem; border: 1px solid rgba(0,229,255,0.2); border-radius: 2px; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--steel); background: var(--cyan-dim); font-family: 'Share Tech Mono', monospace; transition: all 0.3s; }
+    .pill:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 12px var(--cyan-dim); }
+    .coming-soon { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--steel); letter-spacing: 0.15em; border: 1px solid rgba(0,229,255,0.1); padding: 0.5rem 1.5rem; position: relative; overflow: hidden; animation: fadeUp 1s ease 0.9s both; }
+    .coming-soon::before { content: ''; position: absolute; left: -100%; top: 0; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(0,229,255,0.1), transparent); animation: scanLine 3s ease-in-out infinite; }
+    @keyframes scanLine { 0% { left: -100%; } 100% { left: 100%; } }
+    .footer { position: fixed; bottom: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: center; padding: 0.75rem; border-top: 1px solid rgba(0,229,255,0.1); background: rgba(5,10,14,0.8); backdrop-filter: blur(10px); font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: rgba(140,160,176,0.5); letter-spacing: 0.1em; }
+    @media (max-width: 480px) { .logo-wrap { width: 220px; height: 220px; } .status-bar { font-size: 0.6rem; padding: 0.6rem 1rem; } }
+  </style>
+</head>
+<body>
+  <div class="status-bar">
+    <div><span class="status-dot"></span>SYSTEMS ONLINE</div>
+    <div>JS-LAB.UK</div>
+    <div>SECURE · DEPLOY · MONITOR</div>
+  </div>
+  <div class="container">
+    <div class="logo-wrap">
+      <div class="scan-ring"></div>
+      <div class="scan-ring-2"></div>
+      <img src="IMG-20260616-WA0035.jpg" alt="JS-LAB Logo" />
+    </div>
+    <div class="title-block">
+      <h1>JS<span>-</span>LAB</h1>
+      <p class="subtitle">INFRASTRUCTURE LAB</p>
+    </div>
+    <div class="divider"><span>◆</span></div>
+    <div class="pills">
+      <div class="pill">SECURE</div>
+      <div class="pill">DEPLOY</div>
+      <div class="pill">MONITOR</div>
+    </div>
+    <div class="coming-soon">// FULL SITE COMING SOON</div>
+  </div>
+  <div class="footer">© 2026 JS-LAB · JONATHAN SAMUEL · js-lab.uk</div>
+</body>
+</html>
