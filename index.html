@@ -101,6 +101,38 @@ footer { position: relative; z-index: 1; display: flex; align-items: center; jus
 @media (max-width: 480px) { .logo-wrap { width: 200px; height: 200px; } .status-bar { font-size: 0.6rem; padding: 0.6rem 1rem; } .stack-grid { grid-template-columns: repeat(2, 1fr); } .contact-row { flex-direction: column; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; } }
 </style>
+
+
+
+<style id="MOBILE-FIX">
+@media (max-width: 768px), (pointer: coarse) {
+
+    * {
+        transition-duration: 0.15s !important;
+    }
+
+    .floating, .float, .parallax {
+        animation-duration: 6s !important;
+    }
+
+    body {
+        font-size: 16px;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    img, video {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .hero {
+        padding: 20px 16px;
+    }
+}
+</style>
+
+
+
 </head>
 <body>
 <div class="status-bar">
