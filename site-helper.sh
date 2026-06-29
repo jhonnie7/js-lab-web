@@ -37,10 +37,10 @@ echo "  Cards present:"
 grep -o 'stack-name">[^<]*' index.html | sed 's/stack-name">/  · /'
 echo ""
 echo "── WRITING (// WRITING)"
-grep -o 'href="https://community[^"]*"' index.html | sed 's/href="/  · /' | sed 's/"//'
+grep -A1 'contact-btn' index.html | grep -o 'href="https://[^"]*"' | sed 's/href="//' | sed 's/"//' | sed 's/^/  · /'
 echo ""
 echo "── CONNECT (// CONNECT)"
-grep -o 'href="https://[^"]*" target' index.html | sed 's/href="/  · /' | sed 's/" target//'
+
 echo ""
 echo "── FOOTER"
 grep -o '© [^<]*' index.html
