@@ -37,7 +37,7 @@ echo "  Cards present:"
 grep -o 'stack-name">[^<]*' index.html | sed 's/stack-name">/  · /'
 echo ""
 echo "── WRITING (// WRITING)"
-grep -A1 'contact-btn' index.html | grep -o 'href="https://[^"]*"' | sed 's/href="//' | sed 's/"//' | sed 's/^/  · /'
+grep -o 'href="https://github[^"]*\|href="https://www.linkedin[^"]*' index.html | sed 's/href="//;s/"//' | sed 's/^/  · /'
 echo ""
 echo "── CONNECT (// CONNECT)"
 
