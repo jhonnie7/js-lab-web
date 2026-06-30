@@ -1,17 +1,17 @@
 {
-  "updated": "2026-06-30T08:42:28Z",
+  "updated": "2026-06-30T09:00:03Z",
   "services": {
     "hypervisor": "online",
     "media_server": "online",
-    "vpn": "offline",
+    "vpn": "online",
     "security": "online"
   },
   "stats": {
-    "containers_running": 4,
+    "containers_running": 5,
     "containers_total": 12,
     "uptime_days": 8,
     "wireguard_peers_connected": 0,
-    "wireguard_peers_total": 0,
+    "wireguard_peers_total": 4,
     "active_streams": 0
   },
   "security": {
