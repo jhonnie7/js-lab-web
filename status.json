@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-30T09:28:06Z",
+  "updated": "2026-06-30T09:30:18Z",
   "services": {
     "hypervisor": "online",
     "media_server": "online",
@@ -10,7 +10,7 @@
     "containers_running": 5,
     "containers_total": 12,
     "uptime_days": 8,
-    "wireguard_peers_connected": 0,
+    "wireguard_peers_connected": 1,
     "wireguard_peers_total": 4,
     "active_streams": 1
   },
