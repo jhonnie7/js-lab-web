@@ -144,13 +144,15 @@ if [[ ! -f "status.json" ]]; then
     return 1
 fi
 echo -e "${GREEN}status.json refreshed${NC}"
-if ! git diff --quiet status.json; then
+OLD_CONTENT=$(git show HEAD:status.json 2>/dev/null | python3 -c "import json,sys; d=json.load(sys.stdin); d.pop('updated',None); print(json.dumps(d,sort_keys=True))" 2>/dev/null)
+NEW_CONTENT=$(python3 -c "import json; d=json.load(open('status.json')); d.pop('updated',None); print(json.dumps(d,sort_keys=True))")
+if [[ "$OLD_CONTENT" != "$NEW_CONTENT" ]]; then
     git add status.json
     git commit -m "Auto-update status.json $(date -u +%Y-%m-%dT%H:%M:%SZ)"
     git push
     echo -e "${GREEN}status.json committed and pushed — Cloudflare Pages will redeploy${NC}"
 else
-    echo "No changes to status.json, nothing to commit"
+    echo "No substantive changes to status.json, skipping commit"
 fi
 }
 help_menu() {
