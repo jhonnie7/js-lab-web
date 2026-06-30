@@ -139,10 +139,18 @@ PY
 refresh_status() {
 echo "Regenerating status.json via /opt/telegram-bot/generate_status.py..."
 /opt/telegram-bot/venv/bin/python3 /opt/telegram-bot/generate_status.py
-if [[ -f "status.json" ]]; then
-    echo -e "${GREEN}status.json refreshed${NC}"
-else
+if [[ ! -f "status.json" ]]; then
     echo -e "${RED}status.json not found after run — check generate_status.py output${NC}"
+    return 1
+fi
+echo -e "${GREEN}status.json refreshed${NC}"
+if ! git diff --quiet status.json; then
+    git add status.json
+    git commit -m "Auto-update status.json $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+    git push
+    echo -e "${GREEN}status.json committed and pushed — Cloudflare Pages will redeploy${NC}"
+else
+    echo "No changes to status.json, nothing to commit"
 fi
 }
 help_menu() {
