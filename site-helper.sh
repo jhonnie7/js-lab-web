@@ -1,5 +1,14 @@
 #!/bin/bash
 
+
+# INFRA NOTE (2026-06-30): Caddy trusted_proxies is a GLOBAL-ONLY directive.
+# Lives in /etc/caddy/Caddyfile under the global options block:
+#   { servers { trusted_proxies static <CF ranges> } }
+# It is NOT a per-site importable snippet/macro — `import cloudflare_trust`
+# in a vhost block fails validation ("unrecognized directive"). Fixed after
+# caddy-proxmox jail banned a Cloudflare edge IP (172.70.153.176) instead of
+# the real client IP, because client_ip in JSON logs wasn't resolving from
+# X-Forwarded-For/Cf-Connecting-Ip without trusted_proxies configured.
 SITE_DIR="/opt/js-lab-web"
 cd "$SITE_DIR" || exit 1
 
