@@ -83,18 +83,7 @@ section { position: relative; z-index: 1; padding: 5rem 2rem; max-width: 860px; 
 .t-comment { color: rgba(140,160,176,0.45); }
 .t-cursor { display: inline-block; width: 8px; height: 14px; background: var(--cyan); animation: blink 1.1s step-end infinite; vertical-align: text-bottom; margin-left: 2px; }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-.t-line-1 { animation: reveal 0.01s 0.5s both; }
-.t-line-2 { animation: reveal 0.01s 1.3s both; }
-.t-line-3 { animation: reveal 0.01s 2.0s both; }
-.t-line-4 { animation: reveal 0.01s 2.1s both; }
-.t-line-5 { animation: reveal 0.01s 2.2s both; }
-.t-line-6 { animation: reveal 0.01s 2.3s both; }
-.t-line-7 { animation: reveal 0.01s 2.4s both; }
-.t-line-8 { animation: reveal 0.01s 2.5s both; }
-.t-line-9 { animation: reveal 0.01s 2.6s both; }
-.t-line-10 { animation: reveal 0.01s 2.7s both; }
-.t-line-11 { animation: reveal 0.01s 2.8s both; }
-@keyframes reveal { from { opacity: 0; } to { opacity: 1; } }
+
 .stack-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
 .stack-card { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; cursor: default; transition: all 0.3s; text-decoration: none; }
 .stack-card:hover .stack-ring { border-color: var(--cyan); box-shadow: 0 0 25px var(--cyan-glow), inset 0 0 15px rgba(0,229,255,0.05); }
@@ -116,16 +105,35 @@ section { position: relative; z-index: 1; padding: 5rem 2rem; max-width: 860px; 
 .contact-btn svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
 footer { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; padding: 1rem; border-top: 1px solid rgba(0,229,255,0.1); background: rgba(5,10,14,0.8); backdrop-filter: blur(10px); font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: rgba(140,160,176,0.5); letter-spacing: 0.1em; }
 @media (max-width: 480px) { .logo-wrap { width: 200px; height: 200px; } .status-bar { font-size: 0.6rem; padding: 0.6rem 1rem; } .stack-grid { gap: 1.2rem; } .stack-ring { width: 70px; height: 70px; } .stack-icon { font-size: 1.4rem; } .contact-row { flex-direction: column; } }
+
+/* === PARTICLES === */
+#particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+/* === SCROLL REVEAL === */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* === LIVE STATUS LINK IN NAVBAR === */
+.nav-status { display: flex; align-items: center; gap: 0.4rem; }
+.nav-status a { color: var(--steel); text-decoration: none; transition: color 0.3s; font-size: 0.65rem; letter-spacing: 0.1em; }
+.nav-status a:hover { color: var(--cyan); }
+.nav-status .live-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); box-shadow: 0 0 4px rgba(0,255,136,0.5); animation: pulse 2s ease-in-out infinite; }
+
+/* === TERMINAL TYPING === */
+.terminal-body .t-line { opacity: 0; }
+.terminal-body.typing .t-line { opacity: 1; }
+@keyframes typeReveal { from { opacity: 0; } to { opacity: 1; } }
 </style>
 
 
 
 </head>
 <body>
+<canvas id="particles"></canvas>
 <div class="status-bar">
   <div><span class="status-dot"></span>SYSTEMS ONLINE</div>
   <div>JS-LAB.UK</div>
-  <div>SECURE · DEPLOY · MONITOR</div>
+  <div class="nav-status"><span class="live-dot"></span><a href="status.html" id="nav-live-status">LOADING...</a></div>
 </div>
 <main>
   <section class="hero">
@@ -146,7 +154,7 @@ footer { position: relative; z-index: 1; display: flex; align-items: center; jus
     </div>
     <div class="scroll-hint">SCROLL TO EXPLORE</div>
   </section>
-  <section>
+  <section class="reveal">
     <div class="section-label">// ABOUT</div>
     <div class="terminal">
       <div class="terminal-bar">
@@ -154,23 +162,23 @@ footer { position: relative; z-index: 1; display: flex; align-items: center; jus
         <div class="terminal-title">jon@js-lab.uk ~ whoami</div>
       </div>
       <div class="terminal-body">
-        <span class="t-line t-line-1"><span class="t-prompt">❯ </span><span class="t-cmd">whoami --verbose</span></span>
-        <span class="t-line t-line-2 t-comment"># Loading profile...</span>
-        <span class="t-line t-line-3"><span class="t-out"><span class="t-key">name</span>        : <span class="t-val">Jonathan Samuel</span></span></span>
-        <span class="t-line t-line-4"><span class="t-out"><span class="t-key">role</span>        : <span class="t-val">SAP Basis &amp; IT Infrastructure Administrator</span></span></span>
-        <span class="t-line t-line-5"><span class="t-out"><span class="t-key">location</span>    : <span class="t-val">IL</span></span></span>
-        <span class="t-line t-line-6"><span class="t-out"><span class="t-key">certified</span>   : <span class="t-val">SAP · Microsoft · Udemy</span></span>
-        <span class="t-line t-line-6 t-out"><span class="t-key">focus</span>       : <span class="t-val">Infrastructure · Security · Automation</span></span></span>
-        <span class="t-line t-line-7"><span class="t-out"><span class="t-key">platforms</span>   : <span class="t-val">Windows Server · Linux · BTP · NetWeaver</span></span>
-        <span class="t-line t-line-7 t-out"><span class="t-key">homelab</span>     : <span class="t-val">Proxmox · Self-hosted · Always experimenting</span></span></span>
-        <span class="t-line t-line-8"><span class="t-out"><span class="t-key">speciality</span>  : <span class="t-val">SAP Basis · HANA · Oracle · Linux · Security Hardening</span></span></span>
-        <span class="t-line t-line-9"><span class="t-out"><span class="t-key">currently</span>   : <span class="t-val">Building · Securing · Automating</span></span></span>
-        <span class="t-line t-line-10"><span class="t-out"><span class="t-key">status</span>      : <span class="t-val" style="color:var(--green)">ONLINE ●</span></span></span>
-        <span class="t-line t-line-11"><span class="t-prompt">❯ </span><span class="t-cursor"></span></span>
+        <span class="t-line"><span class="t-prompt">❯ </span><span class="t-cmd">whoami --verbose</span></span>
+        <span class="t-line t-comment"># Loading profile...</span>
+        <span class="t-line"><span class="t-out"><span class="t-key">name</span>        : <span class="t-val">Jonathan Samuel</span></span></span>
+        <span class="t-line"><span class="t-out"><span class="t-key">role</span>        : <span class="t-val">SAP Basis &amp; IT Infrastructure Administrator</span></span></span>
+        <span class="t-line"><span class="t-out"><span class="t-key">location</span>    : <span class="t-val">IL</span></span></span>
+        <span class="t-line"><span class="t-out"><span class="t-key">certified</span>   : <span class="t-val">SAP · Microsoft · Udemy</span></span>
+        <span class="t-line t-out"><span class="t-key">focus</span>       : <span class="t-val">Infrastructure · Security · Automation</span></span></span>
+        <span class="t-line"><span class="t-out"><span class="t-key">platforms</span>   : <span class="t-val">Windows Server · Linux · BTP · NetWeaver</span></span>
+        <span class="t-line t-out"><span class="t-key">homelab</span>     : <span class="t-val">Proxmox · Self-hosted · Always experimenting</span></span></span>
+        <span class="t-line"><span class="t-out"><span class="t-key">speciality</span>  : <span class="t-val">SAP Basis · HANA · Oracle · Linux · Security Hardening</span></span></span>
+        <span class="t-line"><span class="t-out"><span class="t-key">currently</span>   : <span class="t-val">Building · Securing · Automating</span></span></span>
+        <span class="t-line"><span class="t-out"><span class="t-key">status</span>      : <span class="t-val" style="color:var(--green)">ONLINE ●</span></span></span>
+        <span class="t-line"><span class="t-prompt">❯ </span><span class="t-cursor"></span></span>
       </div>
     </div>
   </section>
-  <section>
+  <section class="reveal">
     <div class="section-label">// TECH STACK</div>
     <div class="stack-grid">
       <div class="stack-card"><div class="stack-ring"><div class="stack-icon">🖥️</div></div><div class="stack-info"><div class="stack-name">Proxmox VE</div><div class="stack-cat">HYPERVISOR</div></div></div>
@@ -188,7 +196,7 @@ footer { position: relative; z-index: 1; display: flex; align-items: center; jus
       <div class="stack-card"><div class="stack-ring"><div class="stack-icon">📱</div></div><div class="stack-info"><div class="stack-name">Flutter</div><div class="stack-cat">MOBILE · FIREBASE</div></div></div>
     </div>
   </section>
-  <section>
+  <section class="reveal">
     <div class="section-label">// WRITING</div>
     <div class="writing-grid">
       <a class="writing-card" href="https://community.sap.com/t5/technology-blog-posts-by-members/setting-up-cloud-connector-with-btp-integration-over-oauth2-authorization/ba-p/13560321" target="_blank" rel="noopener">
@@ -200,7 +208,7 @@ footer { position: relative; z-index: 1; display: flex; align-items: center; jus
       </a>
     </div>
   </section>
-  <section>
+  <section class="reveal">
     <div class="section-label">// CONNECT</div>
     <div class="contact-row">
       <a class="contact-btn" href="status.html">
@@ -219,5 +227,137 @@ footer { position: relative; z-index: 1; display: flex; align-items: center; jus
   </section>
 </main>
 <footer>© 2026 JS-LAB · JONATHAN SAMUEL · js-lab.uk</footer>
+
+<script>
+// === PARTICLE SYSTEM ===
+(function() {
+  var canvas = document.getElementById('particles');
+  var ctx = canvas.getContext('2d');
+  var particles = [];
+  var count = 50;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  for (var i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 1.5 + 0.5,
+      a: Math.random() * 0.5 + 0.1
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0) p.x = canvas.width;
+      if (p.x > canvas.width) p.x = 0;
+      if (p.y < 0) p.y = canvas.height;
+      if (p.y > canvas.height) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 229, 255, ' + p.a + ')';
+      ctx.fill();
+    }
+    // Draw connections between nearby particles
+    for (var i = 0; i < particles.length; i++) {
+      for (var j = i + 1; j < particles.length; j++) {
+        var dx = particles[i].x - particles[j].x;
+        var dy = particles[i].y - particles[j].y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = 'rgba(0, 229, 255, ' + (0.08 * (1 - dist / 120)) + ')';
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// === SCROLL REVEAL ===
+(function() {
+  var reveals = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+  reveals.forEach(function(el) { observer.observe(el); });
+})();
+
+// === TERMINAL TYPING EFFECT ===
+(function() {
+  var body = document.querySelector('.terminal-body');
+  var lines = body.querySelectorAll('.t-line');
+  var terminalObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        terminalObserver.disconnect();
+        typeLines();
+      }
+    });
+  }, { threshold: 0.3 });
+  terminalObserver.observe(body);
+
+  function typeLines() {
+    var delay = 0;
+    for (var i = 0; i < lines.length; i++) {
+      (function(line, d) {
+        setTimeout(function() {
+          line.style.opacity = '1';
+          line.style.animation = 'typeReveal 0.15s ease forwards';
+        }, d);
+      })(lines[i], delay);
+      if (i === 0) delay += 600;
+      else if (i === 1) delay += 800;
+      else delay += 120;
+    }
+  }
+})();
+
+// === LIVE STATUS IN NAVBAR ===
+(function() {
+  var el = document.getElementById('nav-live-status');
+  fetch('status.json', { cache: 'no-store' })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var services = data.services || {};
+      var total = 0, online = 0;
+      for (var k in services) {
+        if (services.hasOwnProperty(k)) {
+          total++;
+          if (services[k] === 'online') online++;
+        }
+      }
+      el.textContent = online + '/' + total + ' ONLINE';
+      if (online < total) {
+        el.style.color = '#ff9f43';
+        el.parentElement.querySelector('.live-dot').style.background = '#ff9f43';
+      }
+    })
+    .catch(function() {
+      el.textContent = 'STATUS';
+    });
+})();
+</script>
 </body>
 </html>
