@@ -20,59 +20,100 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
   --cyan: #00e5ff;
-  --cyan-dim: rgba(0, 229, 255, 0.12);
+  --cyan-dim: rgba(0, 229, 255, 0.08);
   --cyan-glow: rgba(0, 229, 255, 0.4);
   --cyan-border: rgba(0, 229, 255, 0.2);
   --dark: #050a0e;
   --dark2: #0a1520;
+  --dark3: #0d1a28;
   --steel: #8ca0b0;
   --white: #e8f4f8;
   --green: #00ff88;
+  --green-glow: rgba(0, 255, 136, 0.3);
   --red: #ff5f57;
+  --red-glow: rgba(255, 95, 87, 0.3);
+  --orange: #ff9f43;
+  --orange-glow: rgba(255, 159, 67, 0.3);
 }
 html { scroll-behavior: smooth; }
-html, body { background: var(--dark); color: var(--white); font-family: 'Rajdhani', sans-serif; overflow-x: hidden; }
-body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px); background-size: 60px 60px; z-index: 0; animation: gridShift 20s linear infinite; pointer-events: none; }
-@keyframes gridShift { 0% { background-position: 0 0; } 100% { background-position: 60px 60px; } }
-.status-bar { position: fixed; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 2rem; border-bottom: 1px solid rgba(0,229,255,0.1); background: rgba(5,10,14,0.85); backdrop-filter: blur(10px); font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--steel); z-index: 100; }
+html, body { background: var(--dark); color: var(--white); font-family: 'Rajdhani', sans-serif; overflow-x: hidden; min-height: 100vh; }
+body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(circle at 50% 50%, rgba(0,229,255,0.02) 0%, transparent 70%), linear-gradient(rgba(0,229,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.02) 1px, transparent 1px); background-size: 100% 100%, 60px 60px, 60px 60px; z-index: 0; animation: gridShift 30s linear infinite; pointer-events: none; }
+@keyframes gridShift { 0% { background-position: 0 0, 0 0, 0 0; } 100% { background-position: 0 0, 60px 60px, 60px 60px; } }
+
+.status-bar { position: fixed; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 2rem; border-bottom: 1px solid rgba(0,229,255,0.1); background: rgba(5,10,14,0.92); backdrop-filter: blur(12px); font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--steel); z-index: 100; }
 .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); display: inline-block; margin-right: 0.4rem; animation: pulse 2s ease-in-out infinite; }
 @keyframes pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 4px var(--cyan); } 50% { opacity: 0.4; box-shadow: none; } }
-.status-bar a { color: var(--steel); text-decoration: none; letter-spacing: 0.1em; }
+.status-bar a { color: var(--steel); text-decoration: none; letter-spacing: 0.1em; transition: color 0.3s; }
 .status-bar a:hover { color: var(--cyan); }
-main { position: relative; z-index: 1; padding: 7rem 2rem 4rem; max-width: 860px; margin: 0 auto; }
-.page-title { text-align: center; margin-bottom: 3rem; }
+
+main { position: relative; z-index: 1; padding: 7rem 2rem 4rem; max-width: 960px; margin: 0 auto; }
+.page-title { text-align: center; margin-bottom: 3.5rem; }
 .page-title h1 { font-size: clamp(1.8rem, 6vw, 2.8rem); font-weight: 700; letter-spacing: 0.25em; color: var(--white); text-shadow: 0 0 30px var(--cyan-glow); }
 .page-title h1 span { color: var(--cyan); }
 .page-title p { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--steel); margin-top: 0.6rem; }
-section { position: relative; z-index: 1; margin-bottom: 3rem; }
-.section-label { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--cyan); letter-spacing: 0.3em; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.75rem; }
+
+section { position: relative; z-index: 1; margin-bottom: 4rem; }
+.section-label { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--cyan); letter-spacing: 0.3em; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
 .section-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--cyan-border), transparent); }
-.svc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 0.75rem; }
-.svc-card { border: 1px solid var(--cyan-border); background: var(--cyan-dim); padding: 1rem 1.1rem; border-radius: 3px; transition: all 0.25s; }
-.svc-card.offline { border-color: rgba(255,95,87,0.3); background: rgba(255,95,87,0.06); }
-.svc-name { font-family: 'Share Tech Mono', monospace; font-size: 0.72rem; color: var(--white); letter-spacing: 0.05em; margin-bottom: 0.5rem; }
-.svc-state { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; display: flex; align-items: center; gap: 0.4rem; }
-.dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
-.dot.up { background: var(--green); box-shadow: 0 0 6px var(--green); }
-.dot.down { background: var(--red); box-shadow: 0 0 6px var(--red); }
-.state-up { color: var(--green); }
-.state-down { color: var(--red); }
-.stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.75rem; }
-.stat-card { border: 1px solid var(--cyan-border); background: var(--cyan-dim); padding: 1rem 1.1rem; border-radius: 3px; text-align: center; }
-.stat-val { font-family: 'Share Tech Mono', monospace; font-size: 1.5rem; color: var(--cyan); font-weight: 700; }
-.stat-label { font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; color: var(--steel); letter-spacing: 0.1em; margin-top: 0.3rem; }
-.terminal { background: var(--dark2); border: 1px solid var(--cyan-border); border-radius: 6px; overflow: hidden; box-shadow: 0 0 40px rgba(0,229,255,0.05); }
-.terminal-bar { background: rgba(0,229,255,0.06); padding: 0.6rem 1rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--cyan-border); }
-.t-dot { width: 10px; height: 10px; border-radius: 50%; }
-.t-dot.r { background: #ff5f57; } .t-dot.y { background: #febc2e; } .t-dot.g { background: #28c840; }
-.terminal-title { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--steel); margin-left: auto; margin-right: auto; letter-spacing: 0.1em; }
-.terminal-body { padding: 1.2rem 1.5rem; font-family: 'Share Tech Mono', monospace; font-size: 0.78rem; line-height: 1.8; }
-.t-out { color: var(--steel); display: block; }
-.t-key { color: var(--cyan); }
-.t-val { color: var(--green); }
-.note { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: rgba(140,160,176,0.6); letter-spacing: 0.05em; margin-top: 1rem; text-align: center; }
-footer { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; padding: 1rem; border-top: 1px solid rgba(0,229,255,0.1); background: rgba(5,10,14,0.8); backdrop-filter: blur(10px); font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: rgba(140,160,176,0.5); letter-spacing: 0.1em; }
-@media (max-width: 480px) { .status-bar { font-size: 0.6rem; padding: 0.6rem 1rem; } .svc-grid, .stat-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* === COCKPIT SERVICE INDICATORS === */
+.indicator-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem; }
+.indicator { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+.indicator-light { position: relative; width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 40%, var(--dark3) 0%, var(--dark) 100%); border: 2px solid var(--cyan-border); box-shadow: inset 0 2px 6px rgba(0,0,0,0.5); transition: all 0.5s; }
+.indicator-light::before { content: ''; position: absolute; width: 40px; height: 40px; border-radius: 50%; transition: all 0.5s; }
+.indicator-light.online::before { background: var(--green); box-shadow: 0 0 20px var(--green-glow), 0 0 40px var(--green-glow), inset 0 -3px 6px rgba(0,0,0,0.3); }
+.indicator-light.online { border-color: rgba(0, 255, 136, 0.3); }
+.indicator-light.offline::before { background: var(--red); box-shadow: 0 0 20px var(--red-glow), 0 0 40px var(--red-glow), inset 0 -3px 6px rgba(0,0,0,0.3); animation: alarmPulse 1.5s ease-in-out infinite; }
+.indicator-light.offline { border-color: rgba(255, 95, 87, 0.3); }
+@keyframes alarmPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+.indicator-light::after { content: ''; position: absolute; width: 36px; height: 18px; border-radius: 50% 50% 0 0 / 100% 100% 0 0; top: 18px; background: rgba(255,255,255,0.1); pointer-events: none; }
+.indicator-name { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--white); letter-spacing: 0.08em; text-align: center; }
+.indicator-state { font-family: 'Share Tech Mono', monospace; font-size: 0.55rem; letter-spacing: 0.15em; }
+.indicator-state.up { color: var(--green); }
+.indicator-state.down { color: var(--red); }
+
+/* === CIRCULAR GAUGES === */
+.gauge-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem; }
+.gauge { position: relative; width: 140px; height: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.gauge svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.gauge-bg { fill: none; stroke: var(--dark3); stroke-width: 6; }
+.gauge-ring { fill: none; stroke: var(--cyan); stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1); filter: drop-shadow(0 0 6px var(--cyan-glow)); }
+.gauge-inner { position: relative; z-index: 2; width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle at 50% 40%, var(--dark3) 0%, var(--dark) 100%); border: 1px solid var(--cyan-border); display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: inset 0 2px 8px rgba(0,0,0,0.5), 0 0 20px var(--cyan-dim); }
+.gauge-val { font-family: 'Share Tech Mono', monospace; font-size: 1.6rem; color: var(--cyan); font-weight: 700; line-height: 1; }
+.gauge-unit { font-family: 'Share Tech Mono', monospace; font-size: 0.5rem; color: var(--steel); letter-spacing: 0.1em; margin-top: 0.2rem; }
+.gauge-label { font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; color: var(--steel); letter-spacing: 0.05em; margin-top: 0.85rem; text-align: center; white-space: nowrap; }
+
+/* === SECURITY RING === */
+.security-section { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
+.security-ring-wrap { position: relative; width: 180px; height: 180px; }
+.security-ring-wrap svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.sec-ring-bg { fill: none; stroke: var(--dark3); stroke-width: 8; }
+.sec-ring-fill { fill: none; stroke: var(--green); stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 2s cubic-bezier(0.4,0,0.2,1), stroke 0.5s; filter: drop-shadow(0 0 6px var(--green-glow)); }
+.security-ring-label { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.sec-level { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--green); letter-spacing: 0.2em; font-weight: 700; }
+.sec-icon { font-size: 2rem; margin-bottom: 0.3rem; }
+.security-details { width: 100%; max-width: 400px; }
+.sec-row { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,229,255,0.08); font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; }
+.sec-row:last-child { border-bottom: none; }
+.sec-key { color: var(--steel); letter-spacing: 0.05em; }
+.sec-val { color: var(--cyan); font-weight: 600; }
+
+.note { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: rgba(140,160,176,0.6); letter-spacing: 0.05em; margin-top: 1.5rem; text-align: center; }
+
+footer { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; padding: 1.2rem; border-top: 1px solid rgba(0,229,255,0.1); background: rgba(5,10,14,0.8); backdrop-filter: blur(10px); font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: rgba(140,160,176,0.5); letter-spacing: 0.1em; }
+
+@media (max-width: 600px) {
+  .status-bar { font-size: 0.6rem; padding: 0.6rem 1rem; }
+  .gauge-grid { gap: 1.2rem; }
+  .gauge { width: 110px; height: 110px; }
+  .gauge-inner { width: 78px; height: 78px; }
+  .gauge-val { font-size: 1.3rem; }
+  .indicator-grid { gap: 1.5rem; }
+  .indicator-light { width: 64px; height: 64px; }
+  .indicator-light::before { width: 30px; height: 30px; }
+  .indicator-light::after { width: 26px; height: 14px; top: 14px; }
+  .security-ring-wrap { width: 140px; height: 140px; }
+}
 </style>
 </head>
 <body>
@@ -83,96 +124,160 @@ footer { position: relative; z-index: 1; display: flex; align-items: center; jus
 <main>
   <div class="page-title">
     <h1>LIVE<span> </span>STATUS</h1>
-    <p>HOMELAB INFRASTRUCTURE · REFRESHED HOURLY</p>
+    <p>HOMELAB INFRASTRUCTURE &middot; REFRESHED HOURLY</p>
   </div>
 
   <section>
     <div class="section-label">// SERVICES</div>
-    <div class="svc-grid" id="services-grid">
-      <div class="svc-card"><div class="svc-name">HYPERVISOR</div><div class="svc-state"><span class="dot up"></span><span class="state-up">LOADING</span></div></div>
+    <div class="indicator-grid" id="services-grid">
+      <div class="indicator">
+        <div class="indicator-light online"></div>
+        <div class="indicator-name">LOADING</div>
+        <div class="indicator-state up">...</div>
+      </div>
     </div>
   </section>
 
   <section>
     <div class="section-label">// INFRASTRUCTURE</div>
-    <div class="stat-grid" id="stats-grid"></div>
+    <div class="gauge-grid" id="stats-grid"></div>
   </section>
 
   <section>
     <div class="section-label">// SECURITY POSTURE</div>
-    <div class="terminal">
-      <div class="terminal-bar">
-        <div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div>
-        <div class="terminal-title">jon@js-lab.uk ~ security --status</div>
+    <div class="security-section" id="security-section">
+      <div class="security-ring-wrap">
+        <svg viewBox="0 0 180 180">
+          <circle class="sec-ring-bg" cx="90" cy="90" r="76"></circle>
+          <circle class="sec-ring-fill" id="sec-ring" cx="90" cy="90" r="76" stroke-dasharray="477.5" stroke-dashoffset="477.5"></circle>
+        </svg>
+        <div class="security-ring-label">
+          <div class="sec-icon">&#x1f6e1;</div>
+          <div class="sec-level" id="sec-level">SCANNING</div>
+        </div>
       </div>
-      <div class="terminal-body" id="security-body">
-        <span class="t-out">loading...</span>
-      </div>
+      <div class="security-details" id="security-details"></div>
     </div>
-    <p class="note" id="updated-note">Last updated: —</p>
+    <p class="note" id="updated-note">Last updated: &mdash;</p>
   </section>
 </main>
-<footer>© 2026 JS-LAB · JONATHAN SAMUEL · js-lab.uk</footer>
+<footer>&copy; 2026 JS-LAB &middot; JONATHAN SAMUEL &middot; js-lab.uk</footer>
 
 <script>
+function createGauge(value, max, label, unit) {
+  const r = 62;
+  const circ = 2 * Math.PI * r;
+  const pct = Math.min(value / max, 1);
+  const offset = circ - (pct * circ);
+  return '<div class="gauge">' +
+    '<svg viewBox="0 0 140 140">' +
+      '<circle class="gauge-bg" cx="70" cy="70" r="' + r + '"></circle>' +
+      '<circle class="gauge-ring" cx="70" cy="70" r="' + r + '"' +
+        ' stroke-dasharray="' + circ + '" stroke-dashoffset="' + offset + '"></circle>' +
+    '</svg>' +
+    '<div class="gauge-inner">' +
+      '<div class="gauge-val">' + value + '</div>' +
+      '<div class="gauge-unit">' + unit + '</div>' +
+    '</div>' +
+    '<div class="gauge-label">' + label + '</div>' +
+  '</div>';
+}
+
 async function loadStatus() {
-  const servicesGrid = document.getElementById('services-grid');
-  const statsGrid = document.getElementById('stats-grid');
-  const secBody = document.getElementById('security-body');
-  const updatedNote = document.getElementById('updated-note');
+  var servicesGrid = document.getElementById('services-grid');
+  var statsGrid = document.getElementById('stats-grid');
+  var secDetails = document.getElementById('security-details');
+  var secRing = document.getElementById('sec-ring');
+  var secLevel = document.getElementById('sec-level');
+  var updatedNote = document.getElementById('updated-note');
 
   try {
-    const res = await fetch('status.json', { cache: 'no-store' });
+    var res = await fetch('status.json', { cache: 'no-store' });
     if (!res.ok) throw new Error('status.json unavailable');
-    const data = await res.json();
+    var data = await res.json();
 
-    const svcLabels = {
+    var svcLabels = {
       hypervisor: 'HYPERVISOR',
       media_server: 'MEDIA SERVER',
       vpn: 'VPN',
       security: 'IPS / FIREWALL'
     };
 
-    servicesGrid.innerHTML = Object.entries(data.services || {}).map(([key, val]) => {
-      const up = val === 'online';
-      return `<div class="svc-card ${up ? '' : 'offline'}">
-        <div class="svc-name">${svcLabels[key] || key.toUpperCase()}</div>
-        <div class="svc-state">
-          <span class="dot ${up ? 'up' : 'down'}"></span>
-          <span class="${up ? 'state-up' : 'state-down'}">${up ? 'ONLINE' : 'OFFLINE'}</span>
-        </div>
-      </div>`;
-    }).join('');
+    var svcHtml = '';
+    var services = data.services || {};
+    for (var key in services) {
+      if (!services.hasOwnProperty(key)) continue;
+      var val = services[key];
+      var up = val === 'online';
+      svcHtml += '<div class="indicator">' +
+        '<div class="indicator-light ' + (up ? 'online' : 'offline') + '"></div>' +
+        '<div class="indicator-name">' + (svcLabels[key] || key.replace(/_/g, ' ').toUpperCase()) + '</div>' +
+        '<div class="indicator-state ' + (up ? 'up' : 'down') + '">' + (up ? 'ONLINE' : 'OFFLINE') + '</div>' +
+      '</div>';
+    }
+    servicesGrid.innerHTML = svcHtml;
 
-    const stats = data.stats || {};
-    const statItems = [
-      { val: stats.containers_running ?? '—', label: 'CONTAINERS RUNNING' },
-      { val: stats.uptime_days ?? '—', label: 'UPTIME (DAYS)' },
-      { val: stats.wireguard_peers_connected ?? '—', label: 'VPN PEERS ONLINE' },
-      { val: stats.active_streams ?? '—', label: 'ACTIVE STREAMS' },
+    var stats = data.stats || {};
+    var gauges = [
+      { val: stats.containers_running || 0, max: 30, label: 'CONTAINERS', unit: 'RUNNING' },
+      { val: stats.uptime_days || 0, max: 365, label: 'UPTIME', unit: 'DAYS' },
+      { val: stats.wireguard_peers_connected || 0, max: 10, label: 'VPN PEERS', unit: 'ONLINE' },
+      { val: stats.active_streams || 0, max: 10, label: 'STREAMS', unit: 'ACTIVE' }
     ];
-    statsGrid.innerHTML = statItems.map(s =>
-      `<div class="stat-card"><div class="stat-val">${s.val}</div><div class="stat-label">${s.label}</div></div>`
-    ).join('');
+    var gaugeHtml = '';
+    for (var i = 0; i < gauges.length; i++) {
+      gaugeHtml += createGauge(gauges[i].val, gauges[i].max, gauges[i].label, gauges[i].unit);
+    }
+    statsGrid.innerHTML = gaugeHtml;
 
-    const sec = data.security || {};
-    secBody.innerHTML = `
-      <span class="t-out"><span class="t-key">active_jails</span>      : <span class="t-val">${sec.active_jails ?? '—'}</span></span>
-      <span class="t-out"><span class="t-key">currently_banned</span>  : <span class="t-val">${sec.currently_banned ?? '—'}</span></span>
-      <span class="t-out"><span class="t-key">waf_status</span>        : <span class="t-val">${(sec.waf_status || '—').toUpperCase()}</span></span>
-    `;
+    var sec = data.security || {};
+    var jails = sec.active_jails || 0;
+    var banned = sec.currently_banned || 0;
+    var waf = (sec.waf_status || 'unknown').toUpperCase();
+
+    var threatScore = Math.max(0, 100 - (banned * 2));
+    var r = 76;
+    var circ = 2 * Math.PI * r;
+    var offset = circ - ((threatScore / 100) * circ);
+    secRing.style.strokeDashoffset = offset;
+
+    if (threatScore > 70) {
+      secRing.style.stroke = 'var(--green)';
+      secLevel.textContent = 'SECURE';
+      secLevel.style.color = 'var(--green)';
+    } else if (threatScore > 40) {
+      secRing.style.stroke = 'var(--orange)';
+      secLevel.textContent = 'CAUTION';
+      secLevel.style.color = 'var(--orange)';
+    } else {
+      secRing.style.stroke = 'var(--red)';
+      secLevel.textContent = 'ALERT';
+      secLevel.style.color = 'var(--red)';
+    }
+
+    secDetails.innerHTML =
+      '<div class="sec-row"><span class="sec-key">ACTIVE JAILS</span><span class="sec-val">' + jails + '</span></div>' +
+      '<div class="sec-row"><span class="sec-key">CURRENTLY BANNED</span><span class="sec-val">' + banned + '</span></div>' +
+      '<div class="sec-row"><span class="sec-key">WAF STATUS</span><span class="sec-val">' + waf + '</span></div>' +
+      '<div class="sec-row"><span class="sec-key">THREAT SCORE</span><span class="sec-val">' + threatScore + '%</span></div>';
 
     if (data.updated) {
-      const d = new Date(data.updated);
-      updatedNote.textContent = `Last updated: ${d.toLocaleString()}`;
+      var d = new Date(data.updated);
+      updatedNote.textContent = 'Last updated: ' + d.toLocaleString();
     }
   } catch (err) {
-    servicesGrid.innerHTML = `<div class="svc-card offline"><div class="svc-name">STATUS UNAVAILABLE</div><div class="svc-state"><span class="dot down"></span><span class="state-down">CHECK BACK SOON</span></div></div>`;
+    servicesGrid.innerHTML = '<div class="indicator">' +
+      '<div class="indicator-light offline"></div>' +
+      '<div class="indicator-name">STATUS UNAVAILABLE</div>' +
+      '<div class="indicator-state down">CHECK BACK SOON</div>' +
+    '</div>';
     statsGrid.innerHTML = '';
-    secBody.innerHTML = `<span class="t-out">status feed temporarily unavailable.</span>`;
+    secDetails.innerHTML = '<div class="sec-row"><span class="sec-key">STATUS</span><span class="sec-val">FEED UNAVAILABLE</span></div>';
   }
 }
+
 loadStatus();
+setInterval(loadStatus, 300000);
 </script>
 </body>
 </html>
