@@ -1,0 +1,6 @@
+backups/
+*.backup
+
+site-helper.sh
+certsite/assets/certs/Jonathan_Samuel_CV_Heb_2026.docx
+ARCHITECTURE.md

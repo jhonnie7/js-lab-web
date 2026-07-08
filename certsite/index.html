@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JS-LAB | Certificates & Training</title>
+<link rel="icon" type="image/png" href="/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="theme-color" content="#050a0e">
+<meta name="description" content="JS-LAB — Certificates & Training. SAP, Microsoft, and professional certifications by Jonathan Samuel.">
+<meta property="og:title" content="JS-LAB | Certificates & Training" />
+<meta property="og:description" content="Certificates & Training — SAP, Microsoft, and professional certifications." />
+<meta property="og:image" content="https://js-lab.uk/js-lab-logo-round.png" />
+<meta property="og:url" content="https://js-lab.uk/certsite/" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="particles"></canvas>
+
+<div class="status-bar">
+  <div><span class="status-dot"></span>CERTIFICATES & TRAINING</div>
+  <div><a href="/" class="nav-home">JS-LAB.UK</a></div>
+  <div class="nav-status"><span class="mono" id="lastVerified">LOADING...</span></div>
+</div>
+
+<main>
+  <section class="hero">
+    <div class="title-block">
+      <h1>CERTIFICATES<span> &amp; </span>TRAINING</h1>
+      <p class="subtitle">JONATHAN SAMUEL &middot; SAP BASIS &amp; IT INFRASTRUCTURE</p>
+    </div>
+    <div class="divider"><span>&#9670;</span></div>
+    <div class="readout" id="readout"></div>
+    <div class="hero-actions">
+      <a class="pill-link" href="/">&#x2190; BACK TO JS-LAB</a>
+    </div>
+  </section>
+
+  <nav class="toc">
+    <a href="#certifications">01 // CERTIFICATIONS</a>
+    <a href="#journeys">02 // SAP LEARNING</a>
+    <a href="#microsoft">03 // MICROSOFT</a>
+  </nav>
+
+  <section id="certifications" class="registry reveal">
+    <div class="section-label">// SAP CERTIFICATIONS<span class="count" id="count-sap"></span></div>
+    <div class="rows" id="rows-sap"></div>
+  </section>
+
+  <section id="journeys" class="registry reveal">
+    <div class="section-label">// SAP LEARNING JOURNEYS<span class="count" id="count-journeys"></span></div>
+    <div class="rows" id="rows-journeys"></div>
+  </section>
+
+  <section id="microsoft" class="registry reveal">
+    <div class="section-label">// MICROSOFT CERTIFIED TRAINING<span class="count" id="count-ms"></span></div>
+    <p class="subnote">Completed toward MCSE: Windows Server 2003 — Hi-Tech College, 2007-2008.</p>
+    <div class="rows" id="rows-ms"></div>
+  </section>
+</main>
+
+<footer>&copy; 2026 JS-LAB &middot; JONATHAN SAMUEL &middot; CERTIFICATES & TRAINING</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Certificate image">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+  <figure>
+    <img id="lightboxImg" src="" alt="">
+    <figcaption id="lightboxCaption" class="mono"></figcaption>
+  </figure>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script>
+// Particles
+(function() {
+  var canvas = document.getElementById("particles");
+  var ctx = canvas.getContext("2d");
+  var particles = [];
+  var count = 35;
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener("resize", resize);
+  for (var i = 0; i < count; i++) {
+    particles.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, vx:(Math.random()-0.5)*0.3, vy:(Math.random()-0.5)*0.3, r:Math.random()*1.5+0.5, a:Math.random()*0.4+0.1 });
+  }
+  function draw() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    for (var i=0;i<particles.length;i++) {
+      var p=particles[i]; p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0)p.x=canvas.width; if(p.x>canvas.width)p.x=0;
+      if(p.y<0)p.y=canvas.height; if(p.y>canvas.height)p.y=0;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle="rgba(0,229,255,"+p.a+")"; ctx.fill();
+    }
+    for(var i=0;i<particles.length;i++){for(var j=i+1;j<particles.length;j++){
+      var dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<120){ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.strokeStyle="rgba(0,229,255,"+(0.06*(1-dist/120))+")";ctx.lineWidth=0.5;ctx.stroke();}
+    }}
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// Scroll reveal
+(function() {
+  var reveals = document.querySelectorAll(".reveal");
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) { if(entry.isIntersecting) entry.target.classList.add("visible"); });
+  }, { threshold: 0.1 });
+  reveals.forEach(function(el) { observer.observe(el); });
+})();
+</script>
+</body>
+</html>

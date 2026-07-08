@@ -1,0 +1,107 @@
+/* === JS-LAB Credential Registry — matches main site theme === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cyan: #00e5ff;
+  --cyan-dim: rgba(0, 229, 255, 0.12);
+  --cyan-glow: rgba(0, 229, 255, 0.4);
+  --cyan-border: rgba(0, 229, 255, 0.2);
+  --dark: #050a0e;
+  --dark2: #0a1520;
+  --steel: #8ca0b0;
+  --white: #e8f4f8;
+  --green: #00ff88;
+}
+html { scroll-behavior: smooth; }
+html, body { background: var(--dark); color: var(--white); font-family: "Rajdhani", sans-serif; overflow-x: hidden; }
+
+body::before { content: ""; position: fixed; inset: 0; background-image: linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px); background-size: 60px 60px; z-index: 0; animation: gridShift 20s linear infinite; pointer-events: none; }
+@keyframes gridShift { 0% { background-position: 0 0; } 100% { background-position: 60px 60px; } }
+body::after { content: ""; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -60%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,229,255,0.05) 0%, transparent 70%); z-index: 0; pointer-events: none; }
+
+#particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+.mono { font-family: "Share Tech Mono", monospace; }
+
+/* === Status bar === */
+.status-bar { position: fixed; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 2rem; border-bottom: 1px solid rgba(0,229,255,0.1); background: rgba(5,10,14,0.85); backdrop-filter: blur(10px); font-family: "Share Tech Mono", monospace; font-size: 0.7rem; color: var(--steel); z-index: 100; }
+.status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); display: inline-block; margin-right: 0.4rem; animation: pulse 2s ease-in-out infinite; box-shadow: 0 0 4px rgba(0,255,136,0.5); }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.nav-home { color: var(--white); text-decoration: none; letter-spacing: 0.15em; transition: color 0.3s; }
+.nav-home:hover { color: var(--cyan); }
+.nav-status { font-size: 0.65rem; letter-spacing: 0.1em; }
+
+/* === Main === */
+main { position: relative; z-index: 1; padding-top: 3rem; max-width: 900px; margin: 0 auto; padding-left: 2rem; padding-right: 2rem; }
+
+/* === Hero === */
+.hero { padding: 5rem 0 3rem; text-align: center; border-bottom: 1px solid var(--cyan-border); }
+.title-block h1 { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 700; letter-spacing: 0.2em; color: var(--white); text-shadow: 0 0 30px var(--cyan-glow); line-height: 1.2; animation: fadeUp 1s ease both; }
+.title-block h1 span { color: var(--cyan); }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.subtitle { font-family: "Share Tech Mono", monospace; font-size: 0.72rem; letter-spacing: 0.2em; color: var(--steel); margin-top: 0.5rem; }
+.divider { display: flex; align-items: center; gap: 1rem; width: 100%; max-width: 400px; margin: 1.5rem auto; }
+.divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--cyan-dim), transparent); }
+.divider span { font-family: "Share Tech Mono", monospace; font-size: 0.65rem; color: var(--cyan); }
+.readout { font-family: "Share Tech Mono", monospace; font-size: 0.8rem; color: var(--steel); display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; margin-bottom: 1.5rem; }
+.readout strong { color: var(--cyan); font-weight: 600; }
+.readout .sep { color: var(--cyan-border); }
+.hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.pill-link { padding: 0.5rem 1.4rem; border: 1px solid var(--cyan-border); border-radius: 2px; font-family: "Share Tech Mono", monospace; font-size: 0.7rem; letter-spacing: 0.15em; color: var(--steel); background: var(--cyan-dim); text-decoration: none; transition: all 0.3s; }
+.pill-link:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 12px var(--cyan-dim); }
+
+/* === TOC === */
+.toc { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; padding: 1.5rem 0; border-bottom: 1px solid var(--cyan-border); margin-bottom: 2rem; }
+.toc a { font-family: "Share Tech Mono", monospace; font-size: 0.65rem; letter-spacing: 0.12em; color: var(--steel); text-decoration: none; transition: color 0.3s; }
+.toc a:hover { color: var(--cyan); }
+
+/* === Section label === */
+.section-label { font-family: "Share Tech Mono", monospace; font-size: 0.65rem; color: var(--cyan); letter-spacing: 0.3em; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+.section-label::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--cyan-border), transparent); }
+.count { background: var(--cyan-dim); border: 1px solid var(--cyan-border); border-radius: 999px; padding: 2px 10px; font-size: 0.6rem; color: var(--steel); margin-left: 0.5rem; }
+
+/* === Registry sections === */
+.registry { padding: 3rem 0 2rem; border-bottom: 1px solid rgba(0,229,255,0.08); }
+.registry:last-of-type { border-bottom: none; }
+.subnote { font-size: 0.75rem; color: var(--steel); font-style: italic; margin: -0.8rem 0 1.5rem; font-family: "Share Tech Mono", monospace; }
+
+/* === Rows === */
+.rows { display: flex; flex-direction: column; gap: 0; }
+.row { display: grid; grid-template-columns: 72px 1fr auto; align-items: center; gap: 1rem; padding: 1rem 0.8rem; border-top: 1px solid rgba(0,229,255,0.08); border-left: 3px solid transparent; cursor: pointer; border-radius: 4px; transition: background 0.2s, border-left-color 0.2s; }
+.row:last-child { border-bottom: 1px solid rgba(0,229,255,0.08); }
+.row:hover { background: var(--cyan-dim); border-left-color: var(--cyan); }
+.row-thumb { width: 72px; height: 48px; border-radius: 3px; background-size: cover; background-position: center; border: 1px solid var(--cyan-border); flex-shrink: 0; }
+.row-body h4 { font-size: 0.85rem; font-weight: 600; margin: 0 0 0.3rem; line-height: 1.4; color: var(--white); }
+.row-meta { font-family: "Share Tech Mono", monospace; font-size: 0.65rem; color: var(--steel); display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.row-meta .sep { color: var(--cyan-border); }
+.row-meta .date { color: var(--green); }
+.row-meta .verify { color: var(--cyan); }
+.row-meta .verify:hover { text-decoration: underline; }
+.row-action { font-family: "Share Tech Mono", monospace; font-size: 0.6rem; color: var(--steel); letter-spacing: 0.1em; white-space: nowrap; }
+.row:hover .row-action { color: var(--cyan); }
+
+/* === Scroll reveal === */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* === Lightbox === */
+.lightbox { position: fixed; inset: 0; background: rgba(5,10,14,0.92); display: none; align-items: center; justify-content: center; padding: 2rem; z-index: 200; backdrop-filter: blur(4px); }
+.lightbox.open { display: flex; }
+.lightbox figure { margin: 0; max-width: 100%; max-height: 100%; text-align: center; }
+.lightbox img { max-width: 100%; max-height: 80vh; border-radius: 4px; box-shadow: 0 0 60px rgba(0,229,255,0.15); border: 1px solid var(--cyan-border); }
+.lightbox figcaption { color: var(--steel); font-size: 0.7rem; margin-top: 1rem; letter-spacing: 0.08em; }
+.lightbox-close { position: absolute; top: 1.5rem; right: 2rem; background: none; border: none; color: var(--white); font-size: 2rem; cursor: pointer; opacity: 0.7; transition: opacity 0.2s; }
+.lightbox-close:hover { opacity: 1; color: var(--cyan); }
+
+/* === Footer === */
+footer { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; padding: 1.5rem; margin-top: 3rem; border-top: 1px solid rgba(0,229,255,0.1); background: rgba(5,10,14,0.8); backdrop-filter: blur(10px); font-family: "Share Tech Mono", monospace; font-size: 0.65rem; color: rgba(140,160,176,0.5); letter-spacing: 0.1em; }
+
+/* === Responsive === */
+@media (max-width: 560px) {
+  .title-block h1 { font-size: 1.4rem; letter-spacing: 0.1em; }
+  .row { grid-template-columns: 52px 1fr; gap: 0.8rem; }
+  .row-thumb { width: 52px; height: 36px; }
+  .row-action { display: none; }
+  .toc { flex-direction: column; align-items: center; gap: 0.8rem; }
+  .hero-actions { flex-direction: column; align-items: center; }
+  main { padding-left: 1rem; padding-right: 1rem; }
+}

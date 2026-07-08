@@ -1,0 +1,22 @@
+{
+  "updated": "2026-07-01T17:46:27Z",
+  "services": {
+    "hypervisor": "online",
+    "media_server": "online",
+    "vpn": "online",
+    "security": "online"
+  },
+  "stats": {
+    "containers_running": 5,
+    "containers_total": 12,
+    "uptime_days": 0,
+    "wireguard_peers_connected": 1,
+    "wireguard_peers_total": 4,
+    "active_streams": 1
+  },
+  "security": {
+    "active_jails": 6,
+    "currently_banned": 1,
+    "waf_status": "enforced"
+  }
+}
