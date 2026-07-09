@@ -82,6 +82,15 @@ section { position: relative; z-index: 1; padding: 5rem 2rem; max-width: 860px; 
 .t-key { color: var(--cyan); }
 .t-val { color: var(--green); }
 .t-comment { color: rgba(140,160,176,0.45); }
+@keyframes loadingDots {
+  0%, 20% { content: '.'; }
+  40% { content: '..'; }
+  60%, 100% { content: '...'; }
+}
+.t-comment.loading::after {
+  content: '';
+  animation: loadingDots 0.4s steps(1) infinite;
+}
 .t-cursor { display: inline-block; width: 8px; height: 14px; background: var(--cyan); animation: blink 1.1s step-end infinite; vertical-align: text-bottom; margin-left: 2px; }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
@@ -164,7 +173,7 @@ footer { position: relative; z-index: 1; display: flex; align-items: center; jus
       </div>
       <div class="terminal-body">
         <span class="t-line"><span class="t-prompt">❯ </span><span class="t-cmd">whoami --verbose</span></span>
-        <span class="t-line t-comment"># Loading profile...</span>
+        <span class="t-line t-comment loading"># Loading profile</span>
         <span class="t-line"><span class="t-out"><span class="t-key">name</span>        : <span class="t-val">Jonathan Samuel</span></span></span>
         <span class="t-line"><span class="t-out"><span class="t-key">role</span>        : <span class="t-val">SAP Basis &amp; IT Infrastructure Administrator</span></span></span>
         <span class="t-line"><span class="t-out"><span class="t-key">location</span>    : <span class="t-val">IL</span></span></span>
@@ -325,15 +334,17 @@ footer { position: relative; z-index: 1; display: flex; align-items: center; jus
 
   function typeLines() {
     var delay = 0;
+    var loadingLine = lines[1];
     for (var i = 0; i < lines.length; i++) {
-      (function(line, d) {
+      (function(line, d, idx) {
         setTimeout(function() {
           line.style.opacity = '1';
           line.style.animation = 'typeReveal 0.15s ease forwards';
+          if (idx === 2) loadingLine.classList.remove('loading');
         }, d);
-      })(lines[i], delay);
+      })(lines[i], delay, i);
       if (i === 0) delay += 600;
-      else if (i === 1) delay += 800;
+      else if (i === 1) delay += 700;
       else delay += 120;
     }
   }
