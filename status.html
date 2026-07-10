@@ -51,6 +51,8 @@ main { position: relative; z-index: 1; padding: 7rem 2rem 4rem; max-width: 960px
 .page-title h1 { font-size: clamp(1.8rem, 6vw, 2.8rem); font-weight: 700; letter-spacing: 0.25em; color: var(--white); text-shadow: 0 0 30px var(--cyan-glow); }
 .page-title h1 span { color: var(--cyan); }
 .page-title p { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--steel); margin-top: 0.6rem; }
+.pill-link { display: inline-block; margin-top: 1.2rem; padding: 0.5rem 1.4rem; border: 1px solid var(--cyan-border); border-radius: 2px; font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; color: var(--steel); background: var(--cyan-dim); text-decoration: none; transition: all 0.3s; }
+.pill-link:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 12px var(--cyan-dim); }
 
 section { position: relative; z-index: 1; margin-bottom: 4rem; }
 .section-label { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--cyan); letter-spacing: 0.3em; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
@@ -144,6 +146,7 @@ footer { position: relative; z-index: 1; display: flex; align-items: center; jus
   <div class="page-title">
     <h1>LIVE<span> </span>STATUS</h1>
     <p>HOMELAB INFRASTRUCTURE &middot; REFRESHED HOURLY</p>
+    <a class="pill-link" href="https://js-lab.uk/">&#x2190; BACK TO JS-LAB</a>
   </div>
 
   <section>
