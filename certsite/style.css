@@ -24,14 +24,14 @@ body::after { content: ""; position: fixed; top: 50%; left: 50%; transform: tran
 
 /* === Status bar === */
 .status-bar { position: fixed; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 2rem; border-bottom: 1px solid rgba(0,229,255,0.1); background: rgba(5,10,14,0.85); backdrop-filter: blur(10px); font-family: "Share Tech Mono", monospace; font-size: 0.7rem; color: var(--steel); z-index: 100; }
-.status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); display: inline-block; margin-right: 0.4rem; animation: pulse 2s ease-in-out infinite; }
-@keyframes pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 4px var(--cyan); } 50% { opacity: 0.4; box-shadow: none; } }
+.status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 6px var(--cyan), 0 0 12px var(--cyan-glow); display: inline-block; margin-right: 0.4rem; animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--cyan), 0 0 12px var(--cyan-glow); } 50% { opacity: 0.6; box-shadow: 0 0 2px var(--cyan); } }
 .nav-home { color: var(--white); text-decoration: none; letter-spacing: 0.15em; transition: color 0.3s; }
 .nav-home:hover { color: var(--cyan); }
 .nav-status { display: flex; align-items: center; gap: 0.4rem; }
 .nav-status a { color: var(--steel); text-decoration: none; transition: color 0.3s; font-size: 0.65rem; letter-spacing: 0.1em; }
 .nav-status a:hover { color: var(--cyan); }
-.nav-status .live-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); box-shadow: 0 0 4px rgba(0,255,136,0.5); animation: pulse 2s ease-in-out infinite; }
+.nav-status .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green), 0 0 12px var(--green-glow); animation: pulse 2s ease-in-out infinite; }
 
 /* === Main === */
 main { position: relative; z-index: 1; padding-top: 3rem; max-width: 900px; margin: 0 auto; padding-left: 2rem; padding-right: 2rem; }
