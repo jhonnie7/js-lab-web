@@ -45,6 +45,10 @@ body::before { content: ''; position: fixed; inset: 0; background-image: radial-
 @keyframes pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 4px var(--cyan); } 50% { opacity: 0.4; box-shadow: none; } }
 .status-bar a { color: var(--steel); text-decoration: none; letter-spacing: 0.1em; transition: color 0.3s; }
 .status-bar a:hover { color: var(--cyan); }
+.nav-status { display: flex; align-items: center; gap: 0.4rem; }
+.nav-status a { color: var(--steel); text-decoration: none; transition: color 0.3s; font-size: 0.65rem; letter-spacing: 0.1em; }
+.nav-status a:hover { color: var(--cyan); }
+.nav-status .live-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); box-shadow: 0 0 4px rgba(0,255,136,0.5); animation: pulse 2s ease-in-out infinite; }
 
 main { position: relative; z-index: 1; padding: 7rem 2rem 4rem; max-width: 960px; margin: 0 auto; }
 .page-title { text-align: center; margin-bottom: 3.5rem; }
@@ -139,8 +143,9 @@ footer { position: relative; z-index: 1; display: flex; align-items: center; jus
 </head>
 <body>
 <div class="status-bar">
-  <div><span class="status-dot"></span>JS-LAB.UK</div>
-  <div><a href="index.html">&larr; HOME</a></div>
+  <div><span class="status-dot"></span>SYSTEMS ONLINE</div>
+  <div>JS-LAB.UK</div>
+  <div class="nav-status"><span class="live-dot"></span><a href="index.html">HOME</a></div>
 </div>
 <main>
   <div class="page-title">
