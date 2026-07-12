@@ -10,6 +10,7 @@
   --steel: #8ca0b0;
   --white: #e8f4f8;
   --green: #00ff88;
+  --green-glow: rgba(0, 255, 136, 0.3);
 }
 html { scroll-behavior: smooth; }
 html, body { background: var(--dark); color: var(--white); font-family: "Rajdhani", sans-serif; overflow-x: hidden; }
@@ -124,6 +125,7 @@ footer { position: relative; z-index: 1; display: flex; align-items: center; jus
 
 /* === Responsive === */
 @media (max-width: 560px) {
+  .status-bar { font-size: 0.6rem; padding: 0.6rem 1rem; }
   .title-block h1 { font-size: 1.4rem; letter-spacing: 0.1em; }
   .row { grid-template-columns: 52px 1fr; gap: 0.8rem; }
   .row-thumb { width: 52px; height: 36px; }
