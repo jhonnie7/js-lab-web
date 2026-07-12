@@ -166,7 +166,7 @@ body::before {
 /* === SCROLL REVEAL === */
 .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
-#scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--cyan), var(--green)); width: 0%; z-index: 200; }
+#scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--cyan), var(--green)); width: 0%; z-index: 200; box-shadow: 0 0 8px var(--cyan), 0 0 16px var(--cyan-glow); }
 
 /* === LIVE STATUS LINK IN NAVBAR === */
 .nav-status { display: flex; align-items: center; gap: 0.4rem; }
