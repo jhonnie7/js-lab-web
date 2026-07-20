@@ -63,8 +63,10 @@ main { position: relative; z-index: 1; padding-top: 3rem; }
 .pills { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; animation: fadeUp 1s ease 0.7s both; }
 .pill { padding: 0.4rem 1.2rem; border: 1px solid var(--cyan-border); border-radius: 2px; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--steel); background: var(--cyan-dim); font-family: 'Share Tech Mono', monospace; transition: all 0.3s; }
 .pill:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 12px var(--cyan-dim); }
-a.pill { text-decoration: none; color: var(--steel); cursor: pointer; }
-a.pill:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 12px var(--cyan-dim); transform: translateY(-2px); }
+a.pill { text-decoration: none; color: var(--steel); cursor: pointer; position: relative; overflow: hidden; }
+a.pill:hover { border-color: var(--cyan); color: transparent; box-shadow: 0 0 12px var(--cyan-dim); transform: translateY(-2px); }
+a.pill::after { content: attr(data-hover); position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--cyan); opacity: 0; transition: opacity 0.3s; }
+a.pill:hover::after { opacity: 1; }
 section[id] { scroll-margin-top: 4rem; }
 #back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 40px; height: 40px; border: 1px solid var(--cyan-border); background: rgba(5,10,14,0.9); color: var(--cyan); font-size: 1rem; display: flex; align-items: center; justify-content: center; border-radius: 4px; text-decoration: none; z-index: 99; opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.3s, border-color 0.3s, box-shadow 0.3s; backdrop-filter: blur(8px); }
 #back-to-top.visible { opacity: 1; pointer-events: auto; }
@@ -211,9 +213,9 @@ body::before {
     </div>
     <div class="divider"><span>◆</span></div>
     <div class="pills">
-      <a href="#about" class="pill">ABOUT</a>
-      <a href="#tech-stack" class="pill">TECH STACK</a>
-      <a href="#connect" class="pill">CONNECT</a>
+      <a href="#about" class="pill" data-hover="ABOUT">SECURE</a>
+      <a href="#tech-stack" class="pill" data-hover="TECH STACK">DEPLOY</a>
+      <a href="#connect" class="pill" data-hover="CONNECT">MONITOR</a>
     </div>
     <div class="scroll-hint">SCROLL TO EXPLORE</div>
   </section>
