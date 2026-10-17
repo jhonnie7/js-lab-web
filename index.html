@@ -279,6 +279,12 @@ body::before { background-size: auto; animation: none; }
   .reveal { opacity: 1; transform: none; }
   .terminal-body .t-line { opacity: 1; }
 }
+
+/* === PILLS MOBILE GRID === */
+@media (max-width: 480px) {
+  .pills { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; width: 100%; max-width: 320px; }
+  .pill { text-align: center; padding: 0.55rem 0.4rem; letter-spacing: 0.15em; }
+}
 </style>
 
 
