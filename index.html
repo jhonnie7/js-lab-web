@@ -3,22 +3,74 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>JS-LAB | Infrastructure Lab</title>
+<title>JS-LAB | SAP Basis, Cloud Connector &amp; Infrastructure Lab</title>
 <link rel="icon" type="image/png" href="/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#050a0e">
-<meta name="theme-color" content="#050a0e">
-<meta name="description" content="JS-LAB — Infrastructure lab by Jonathan Samuel. SAP Basis, Proxmox homelab, security hardening and automation.">
-<meta property="og:title" content="JS-LAB | Infrastructure Lab" />
-<meta property="og:description" content="Infrastructure lab by Jonathan Samuel. SAP Basis, Proxmox homelab, security hardening and automation." />
+<meta name="description" content="SAP Basis and infrastructure lab by Jonathan Samuel: SAP Cloud Connector on SLES (installation, high availability, upgrade), BTP connectivity, Proxmox homelab and security hardening.">
+<meta property="og:title" content="JS-LAB | SAP Basis, Cloud Connector &amp; Infrastructure Lab" />
+<meta property="og:description" content="SAP Basis and infrastructure lab by Jonathan Samuel: SAP Cloud Connector on SLES (installation, high availability, upgrade), BTP connectivity, Proxmox homelab and security hardening." />
 <meta property="og:image" content="https://js-lab.uk/js-lab-logo-round.png" />
 <meta property="og:url" content="https://js-lab.uk" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="JS-LAB | Infrastructure Lab" />
-<meta name="twitter:description" content="Infrastructure lab by Jonathan Samuel. SAP Basis, Proxmox homelab, security hardening and automation." />
+<meta name="twitter:title" content="JS-LAB | SAP Basis, Cloud Connector &amp; Infrastructure Lab" />
+<meta name="twitter:description" content="SAP Basis and infrastructure lab by Jonathan Samuel: SAP Cloud Connector on SLES (installation, high availability, upgrade), BTP connectivity, Proxmox homelab and security hardening." />
 <meta name="twitter:image" content="https://js-lab.uk/js-lab-logo-round.png" />
+<link rel="canonical" href="https://js-lab.uk/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "name": "Jonathan Samuel",
+      "url": "https://js-lab.uk/",
+      "jobTitle": "SAP Basis Administrator",
+      "sameAs": [
+        "https://github.com/jhonnie7"
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "headline": "Setting Up Cloud Connector with BTP Integration over OAuth2 Authorization",
+      "url": "https://community.sap.com/t5/technology-blog-posts-by-members/setting-up-cloud-connector-with-btp-integration-over-oauth2-authorization/ba-p/13560321",
+      "author": {
+        "@type": "Person",
+        "name": "Jonathan Samuel"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "headline": "SAP Cloud Connector 2.16.2 on SLES 15 SP6 - Part 1: Installation, BTP Connection and HTTPS Mapping",
+      "url": "https://community.sap.com/t5/technology-blog-posts-by-members/sap-cloud-connector-2-16-2-on-sles-15-sp6-part-1-installation-btp/ba-p/14496774",
+      "author": {
+        "@type": "Person",
+        "name": "Jonathan Samuel"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "headline": "SAP Cloud Connector on SLES - Part 2: High Availability with a Shadow Instance and Failover Tests",
+      "url": "https://community.sap.com/t5/technology-blog-posts-by-members/sap-cloud-connector-on-sles-part-2-high-availability-with-a-shadow-instance/ba-p/14499353",
+      "author": {
+        "@type": "Person",
+        "name": "Jonathan Samuel"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "headline": "SAP Cloud Connector on SLES - Part 3: Upgrading from 2.16.2 to 2.19.1 in a High Availability Setup",
+      "url": "https://community.sap.com/t5/technology-blog-posts-by-members/sap-cloud-connector-on-sles-part-3-upgrading-from-2-16-2-to-2-19-1-in-a/ba-p/14500878",
+      "author": {
+        "@type": "Person",
+        "name": "Jonathan Samuel"
+      }
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet" />
 <style>
@@ -190,6 +242,22 @@ body::before {
 .terminal-body .t-line { opacity: 0; }
 .terminal-body.typing .t-line { opacity: 1; }
 @keyframes typeReveal { from { opacity: 0; } to { opacity: 1; } }
+
+/* === FEATURED POSTS REFRESH === */
+.featured-post-card h3.featured-title { margin-bottom: 0.6rem; }
+.featured-desc { font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; line-height: 1.4; color: var(--steel); margin-bottom: 0.9rem; }
+.featured-post-card.compact { padding: 1.4rem 2rem; }
+.series-title { width: 100%; max-width: 600px; margin: 1.2rem auto 0; font-family: 'Rajdhani', sans-serif; font-size: 1.15rem; font-weight: 700; letter-spacing: 0.12em; color: var(--white); text-align: left; }
+.series-title span { font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; letter-spacing: 0.25em; color: var(--cyan); margin-left: 0.6rem; }
+@media (max-width: 480px) {
+  .featured-post-card, .featured-post-card.compact { padding: 1.1rem; }
+  .featured-title { font-size: 1rem; margin-bottom: 0.4rem; }
+  .featured-desc { font-size: 0.88rem; margin-bottom: 0.6rem; }
+  .featured-badge { margin-bottom: 0.7rem; }
+  .featured-meta { margin-bottom: 0.5rem; }
+  #back-to-top { width: 34px; height: 34px; bottom: 1rem; right: 0.6rem; opacity: 0; }
+  #back-to-top.visible { opacity: 0.75; }
+}
 </style>
 
 
@@ -272,28 +340,35 @@ body::before {
     <div class="section-label">// FEATURED POSTS</div>
     <div class="featured-post" style="gap:1.2rem;flex-wrap:wrap">
       <a class="featured-post-card" href="https://community.sap.com/t5/technology-blog-posts-by-members/setting-up-cloud-connector-with-btp-integration-over-oauth2-authorization/ba-p/13560321" target="_blank" rel="noopener">
-        <div class="featured-badge">BTP OAuth2 Guide</div>
-        <div class="featured-title">Setting Up Cloud Connector with BTP Integration over OAuth2 Authorization</div>
-        <div class="featured-meta">SAP COMMUNITY · TECHNOLOGY BLOG POSTS BY MEMBERS</div>
-        <div class="featured-arrow">→ READ ON SAP COMMUNITY</div>
+        <div class="featured-badge">OAuth2 Guide · 2023</div>
+        <h3 class="featured-title">Setting Up Cloud Connector with BTP Integration over OAuth2 Authorization</h3>
+        <p class="featured-desc">Inbound email processing from Microsoft 365 into an SAP system, using Cloud Connector and OAuth2 authorization code flow.</p>
+        <div class="featured-meta">SAP COMMUNITY</div>
+        <div class="featured-arrow">READ →</div>
       </a>
-      <a class="featured-post-card" href="https://community.sap.com/t5/technology-blog-posts-by-members/sap-cloud-connector-2-16-2-on-sles-15-sp6-part-1-installation-btp/ba-p/14496774" target="_blank" rel="noopener">
-        <div class="featured-badge">SCC on SLES Part 1</div>
-        <div class="featured-title">SAP Cloud Connector 2.16.2 on SLES 15 SP6 &ndash; Part 1: Installation, BTP Connection and HTTPS Mapping</div>
-        <div class="featured-meta">SAP COMMUNITY · TECHNOLOGY BLOG POSTS BY MEMBERS</div>
-        <div class="featured-arrow">→ READ ON SAP COMMUNITY</div>
+
+      <h2 class="series-title">Cloud Connector on SLES <span>// 3-PART SERIES</span></h2>
+
+      <a class="featured-post-card compact" href="https://community.sap.com/t5/technology-blog-posts-by-members/sap-cloud-connector-2-16-2-on-sles-15-sp6-part-1-installation-btp/ba-p/14496774" target="_blank" rel="noopener">
+        <div class="featured-badge">Part 1 · Install</div>
+        <h3 class="featured-title">SAP Cloud Connector 2.16.2 on SLES 15 SP6 &ndash; Part 1: Installation, BTP Connection and HTTPS Mapping</h3>
+        <p class="featured-desc">Installing on SLES with SAP JVM, connecting to a BTP subaccount, and exposing an ABAP system over HTTP and HTTPS.</p>
+        <div class="featured-meta">SAP COMMUNITY</div>
+        <div class="featured-arrow">READ →</div>
       </a>
-      <a class="featured-post-card" href="https://community.sap.com/t5/technology-blog-posts-by-members/sap-cloud-connector-on-sles-part-2-high-availability-with-a-shadow-instance/ba-p/14499353" target="_blank" rel="noopener">
-        <div class="featured-badge">SCC on SLES Part 2</div>
-        <div class="featured-title">SAP Cloud Connector on SLES &ndash; Part 2: High Availability with a Shadow Instance and Failover Tests</div>
-        <div class="featured-meta">SAP COMMUNITY · TECHNOLOGY BLOG POSTS BY MEMBERS</div>
-        <div class="featured-arrow">→ READ ON SAP COMMUNITY</div>
+      <a class="featured-post-card compact" href="https://community.sap.com/t5/technology-blog-posts-by-members/sap-cloud-connector-on-sles-part-2-high-availability-with-a-shadow-instance/ba-p/14499353" target="_blank" rel="noopener">
+        <div class="featured-badge">Part 2 · High Availability</div>
+        <h3 class="featured-title">SAP Cloud Connector on SLES &ndash; Part 2: High Availability with a Shadow Instance and Failover Tests</h3>
+        <p class="featured-desc">Master and shadow setup, a controlled role switch, and unplanned failover tests by powering off the active instance.</p>
+        <div class="featured-meta">SAP COMMUNITY</div>
+        <div class="featured-arrow">READ →</div>
       </a>
-      <a class="featured-post-card" href="https://community.sap.com/t5/technology-blog-posts-by-members/sap-cloud-connector-on-sles-part-3-upgrading-from-2-16-2-to-2-19-1-in-a/ba-p/14500878" target="_blank" rel="noopener">
-        <div class="featured-badge">SCC on SLES Part 3</div>
-        <div class="featured-title">SAP Cloud Connector on SLES – Part 3: Upgrading from 2.16.2 to 2.19.1 in a High Availability Setup</div>
-        <div class="featured-meta">SAP COMMUNITY · TECHNOLOGY BLOG POSTS BY MEMBERS</div>
-        <div class="featured-arrow">→ READ ON SAP COMMUNITY</div>
+      <a class="featured-post-card compact" href="https://community.sap.com/t5/technology-blog-posts-by-members/sap-cloud-connector-on-sles-part-3-upgrading-from-2-16-2-to-2-19-1-in-a/ba-p/14500878" target="_blank" rel="noopener">
+        <div class="featured-badge">Part 3 · Upgrade</div>
+        <h3 class="featured-title">SAP Cloud Connector on SLES &ndash; Part 3: Upgrading from 2.16.2 to 2.19.1 in a High Availability Setup</h3>
+        <p class="featured-desc">Rolling upgrade of a master and shadow pair: shadow first, switch roles, then the former master.</p>
+        <div class="featured-meta">SAP COMMUNITY</div>
+        <div class="featured-arrow">READ →</div>
       </a>
     </div>
   </section>
