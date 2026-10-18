@@ -235,11 +235,6 @@ body::before {
 .reveal.visible { opacity: 1; transform: translateY(0); }
 #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--cyan), var(--green)); width: 0%; z-index: 200; box-shadow: 0 0 8px var(--cyan), 0 0 16px var(--cyan-glow); }
 
-/* === LIVE STATUS LINK IN NAVBAR === */
-.nav-status { display: flex; align-items: center; gap: 0.4rem; }
-.nav-status a { color: var(--steel); text-decoration: none; transition: color 0.3s; font-size: 0.65rem; letter-spacing: 0.1em; }
-.nav-status a:hover { color: var(--cyan); }
-.nav-status .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green), 0 0 12px rgba(0,255,136,0.3); animation: pulse 2s ease-in-out infinite; }
 
 /* === TERMINAL TYPING === */
 .terminal-body .t-line { opacity: 0; }
@@ -297,7 +292,7 @@ body::before { background-size: auto; animation: none; }
 <div class="status-bar">
   <div><span class="status-dot"></span>SYSTEMS ONLINE</div>
   <div>JS-LAB.UK</div>
-  <div class="nav-status"><span class="live-dot"></span><a href="status.html" id="nav-live-status">LOADING...</a></div>
+  <div></div>
 </div>
 <main>
   <section class="hero">
@@ -408,10 +403,6 @@ body::before { background-size: auto; animation: none; }
       <a class="contact-btn" href="certsite/">
         <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
         CERTIFICATES & TRAINING
-      </a>
-      <a class="contact-btn" href="status.html">
-        <span class="status-dot" style="margin-right:0.2rem;"></span>
-        LIVE STATUS
       </a>
       <a class="contact-btn" href="https://github.com/jhonnie7" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
@@ -549,31 +540,6 @@ body::before { background-size: auto; animation: none; }
     var scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
     progressBar.style.width = scrolled + '%';
   });
-})();
-
-// === LIVE STATUS IN NAVBAR ===
-(function() {
-  var el = document.getElementById('nav-live-status');
-  fetch('status.json', { cache: 'no-store' })
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      var services = data.services || {};
-      var total = 0, online = 0;
-      for (var k in services) {
-        if (services.hasOwnProperty(k)) {
-          total++;
-          if (services[k] === 'online') online++;
-        }
-      }
-      el.textContent = online + '/' + total + ' ONLINE';
-      if (online < total) {
-        el.style.color = '#ff9f43';
-        el.parentElement.querySelector('.live-dot').style.background = '#ff9f43';
-      }
-    })
-    .catch(function() {
-      el.textContent = 'STATUS';
-    });
 })();
 
 // === COPY TO CLIPBOARD ===
