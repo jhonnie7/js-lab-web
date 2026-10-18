@@ -289,6 +289,10 @@ body::before { background-size: auto; animation: none; }
   .pills { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; width: 100%; max-width: 320px; }
   .pill { text-align: center; padding: 0.55rem 0.4rem; letter-spacing: 0.15em; }
 }
+
+/* === HANGING-INDENT: terminal values wrap under the value, not the key === */
+.terminal-body .t-key { display: inline-block; width: 10ch; vertical-align: top; text-indent: 0; }
+.terminal-body .t-out { padding-left: calc(1.2rem + 13ch); text-indent: -13ch; }
 </style>
 
 
