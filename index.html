@@ -442,10 +442,10 @@ body::before { background-size: auto; animation: none; }
         SAP COMMUNITY
         <button class="copy-btn" data-copy="https://profile.sap.com/u/Johnnie7" aria-label="Copy SAP Community link" onclick="event.preventDefault(); event.stopPropagation(); copyToClipboard(this);">⌧</button>
       </a>
-      <a class="contact-btn" href="mailto:jon@js-lab.uk">
+      <a class="contact-btn" href="#" id="contact-mail" data-u="jon" data-d="js-lab.uk">
         <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
         CONTACT ME
-        <button class="copy-btn" data-copy="jon@js-lab.uk" aria-label="Copy email address" onclick="event.preventDefault(); event.stopPropagation(); copyToClipboard(this);">⌧</button>
+        <button class="copy-btn" aria-label="Copy email address" onclick="event.preventDefault(); event.stopPropagation(); this.setAttribute('data-copy', mailAddr()); copyToClipboard(this);">⌧</button>
       </a>
     </div>
   </section>
@@ -607,6 +607,17 @@ function copyToClipboard(btn) {
     else btn.classList.remove('visible');
   });
 })();
+</script>
+<script>
+// === CONTACT EMAIL (assembled at click time) ===
+function mailAddr() {
+  var a = document.getElementById('contact-mail');
+  return a.dataset.u + '@' + a.dataset.d;
+}
+document.getElementById('contact-mail').addEventListener('click', function(e) {
+  e.preventDefault();
+  window.location.href = 'mailto:' + mailAddr();
+});
 </script>
 </body>
 </html>
