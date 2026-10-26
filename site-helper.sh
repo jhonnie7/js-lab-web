@@ -60,26 +60,8 @@ print("Links    :", html.count("<a "))
 print("Size     :", len(html), "bytes")
 PYEOF
 echo
-echo -e "${BLUE}Status dashboard${NC}"
-if [[ -f "status.json" ]]; then
-    python3 <<'PYEOF'
-import json
-from pathlib import Path
-try:
-    data = json.loads(Path("status.json").read_text())
-    print("Last updated :", data.get("updated", "unknown"))
-    svc = data.get("services", {})
-    for k, v in svc.items():
-        print(f"  {k:14s}: {v}")
-except Exception as e:
-    print("Could not parse status.json:", e)
-PYEOF
-else
-    echo -e "${RED}✗${NC} status.json not found"
-fi
-echo
 echo -e "${BLUE}Required files${NC}"
-for f in index.html js-lab-logo-round.png site-helper.sh status.html
+for f in index.html js-lab-logo-round.png site-helper.sh
 do
     if [[ -f "$f" ]]; then
         echo -e "${GREEN}✓${NC} $f"
@@ -144,25 +126,6 @@ Path("index.html").write_text(html)
 print("Mobile patch applied")
 PY
 }
-refresh_status() {
-echo "Regenerating status.json via /opt/telegram-bot/generate_status.py..."
-/opt/telegram-bot/venv/bin/python3 /opt/telegram-bot/generate_status.py
-if [[ ! -f "status.json" ]]; then
-    echo -e "${RED}status.json not found after run — check generate_status.py output${NC}"
-    return 1
-fi
-echo -e "${GREEN}status.json refreshed${NC}"
-OLD_CONTENT=$(git show HEAD:status.json 2>/dev/null | python3 -c "import json,sys; d=json.load(sys.stdin); d.pop('updated',None); print(json.dumps(d,sort_keys=True))" 2>/dev/null)
-NEW_CONTENT=$(python3 -c "import json; d=json.load(open('status.json')); d.pop('updated',None); print(json.dumps(d,sort_keys=True))")
-if [[ "$OLD_CONTENT" != "$NEW_CONTENT" ]]; then
-    git add status.json
-    git commit -m "Auto-update status.json $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-    git push
-    echo -e "${GREEN}status.json committed and pushed — Cloudflare Pages will redeploy${NC}"
-else
-    echo "No substantive changes to status.json, skipping commit"
-fi
-}
 help_menu() {
 echo
 echo "JS-LAB Helper"
@@ -173,7 +136,6 @@ echo "./site-helper.sh status"
 echo "./site-helper.sh backup"
 echo "./site-helper.sh deploy \"message\""
 echo "./site-helper.sh replace \"OLD\" \"NEW\""
-echo "./site-helper.sh refresh-status"
 echo
 }
 case "$1" in
@@ -192,9 +154,6 @@ replace "$2" "$3"
 ;;
 mobile)
 mobile
-;;
-refresh-status)
-refresh_status
 ;;
 *)
 help_menu
