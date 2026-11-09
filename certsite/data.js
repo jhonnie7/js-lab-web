@@ -5,7 +5,7 @@ const REGISTRY = {
   meta: {
     name: "Yonatan Samuel",
     role: "SAP Basis & IT Infrastructure Administrator",
-    updated: "2026-06-18"
+    updated: "2026-11-09"
   },
 
   certifications: {
@@ -221,5 +221,15 @@ const REGISTRY = {
     }
   ],
 
-  courses: []
+  courses: [
+    {
+      title: "Introducing Joule Studio",
+      issuer: "SAP Learning",
+      level: "Beginner",
+      date: "2026-11-09",
+      dateLabel: "9 Nov 2026",
+      img: "assets/certs/sap-course-joule-studio.jpg",
+      verifyUrl: "https://badger.learning.sap.com/verify/xecuh-kurur-senim-favup-gogec"
+    }
+  ]
 };

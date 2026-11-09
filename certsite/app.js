@@ -111,21 +111,25 @@
     renderList("rows-sap", R.certifications.sap);
     renderList("rows-ms", R.certifications.microsoft);
     renderList("rows-journeys", R.learningJourneys);
+    renderList("rows-courses", R.courses);
 
     var countSap = document.getElementById("count-sap");
     var countMs = document.getElementById("count-ms");
     var countJourneys = document.getElementById("count-journeys");
+    var countCourses = document.getElementById("count-courses");
 
     if (countSap) countSap.textContent = R.certifications.sap.length;
     if (countMs) countMs.textContent = R.certifications.microsoft.length;
     if (countJourneys) countJourneys.textContent = R.learningJourneys.length;
+    if (countCourses) countCourses.textContent = R.courses.length;
 
     var totalCerts = R.certifications.sap.length + R.certifications.microsoft.length;
     var readout = document.getElementById("readout");
     if (readout) {
       readout.innerHTML =
         "<strong>" + totalCerts + "</strong> certifications" +
-        '<span class="sep">&middot;</span><strong>' + R.learningJourneys.length + "</strong> learning journeys";
+        '<span class="sep">&middot;</span><strong>' + R.learningJourneys.length + "</strong> learning journeys" +
+        '<span class="sep">&middot;</span><strong>' + R.courses.length + "</strong> courses";
     }
 
     var updated = new Date(R.meta.updated);
