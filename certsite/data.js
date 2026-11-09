@@ -239,6 +239,15 @@ const REGISTRY = {
       dateLabel: "9 Nov 2026",
       img: "assets/certs/sap-course-joule-setup-landscapes.jpg",
       verifyUrl: "https://badger.learning.sap.com/verify/xugyk-vered-divik-batib-delur"
+    },
+    {
+      title: "Discovering High-Value Opportunities for Agentic AI",
+      issuer: "SAP Learning",
+      level: "Beginner",
+      date: "2026-11-09",
+      dateLabel: "9 Nov 2026",
+      img: "assets/certs/sap-course-agentic-ai-opportunities.jpg",
+      verifyUrl: "https://badger.learning.sap.com/verify/xepum-kihat-henih-sebeg-lupyp"
     }
   ]
 };
