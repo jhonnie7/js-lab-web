@@ -230,6 +230,15 @@ const REGISTRY = {
       dateLabel: "9 Nov 2026",
       img: "assets/certs/sap-course-joule-studio.jpg",
       verifyUrl: "https://badger.learning.sap.com/verify/xecuh-kurur-senim-favup-gogec"
+    },
+    {
+      title: "Setting Up Joule Across your Organizational System Landscapes",
+      issuer: "SAP Learning",
+      level: "Beginner",
+      date: "2026-11-09",
+      dateLabel: "9 Nov 2026",
+      img: "assets/certs/sap-course-joule-setup-landscapes.jpg",
+      verifyUrl: "https://badger.learning.sap.com/verify/xugyk-vered-divik-batib-delur"
     }
   ]
 };
