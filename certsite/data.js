@@ -157,6 +157,7 @@ const REGISTRY = {
   learningJourneys: [
     {
       title: "Discovering SAP Business Technology Platform",
+      verifyUrl: "https://www.credly.com/badges/ab62962e-45db-4e82-9027-dbc881535ed9",
       level: "Foundational",
       date: "2025-02-02",
       dateLabel: "2 Feb 2025",
@@ -171,6 +172,7 @@ const REGISTRY = {
     },
     {
       title: "Discovering the Foundations of SAP Commerce Cloud and SAP S/4HANA Cloud Integrations",
+      verifyUrl: "https://www.credly.com/badges/db86fd0e-a8f6-406b-868a-2c3820549833",
       level: "Foundational",
       date: "2025-02-04",
       dateLabel: "4 Feb 2025",
@@ -178,6 +180,7 @@ const REGISTRY = {
     },
     {
       title: "Exploring Business Scenarios in SAP S/4HANA Cloud Public Edition, Supply Chain",
+      verifyUrl: "https://www.credly.com/badges/02cc5b2b-34d6-4c29-9906-febd5c592e46",
       level: "Intermediate",
       date: "2025-02-04",
       dateLabel: "4 Feb 2025",
@@ -186,6 +189,7 @@ const REGISTRY = {
     },
     {
       title: "Exploring Data Modeling with SAP Solutions",
+      verifyUrl: "https://www.credly.com/badges/dcd7ef9e-9c0e-4c68-88e2-a15e7c7f0b34",
       level: "Foundational",
       date: "2025-02-04",
       dateLabel: "4 Feb 2025",
@@ -193,6 +197,7 @@ const REGISTRY = {
     },
     {
       title: "Learning the Basics of SAP Fiori",
+      verifyUrl: "https://www.credly.com/badges/7fe8968b-a458-4f67-85eb-3beafd7a5d41",
       level: "Foundational",
       date: "2025-02-04",
       dateLabel: "4 Feb 2025",
@@ -200,6 +205,7 @@ const REGISTRY = {
     },
     {
       title: "Leveraging SAP S/4HANA Updates and Upgrades with Zero Downtime Option of Software Update Manager",
+      verifyUrl: "https://www.credly.com/badges/8c1c9c6c-a8c8-458c-88d4-22b0b9cb9c80",
       level: "Foundational",
       date: "2025-02-06",
       dateLabel: "6 Feb 2025",
@@ -207,6 +213,7 @@ const REGISTRY = {
     },
     {
       title: "Setting up an ABAP Environment on SAP BTP",
+      verifyUrl: "https://www.credly.com/badges/450e7f45-2708-4f1f-8914-47b732257241",
       level: "Foundational",
       date: "2025-02-04",
       dateLabel: "4 Feb 2025",
