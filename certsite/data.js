@@ -217,7 +217,8 @@ const REGISTRY = {
       level: "Foundational",
       date: "2025-02-11",
       dateLabel: "11 Feb 2025",
-      img: "assets/certs/sap-lj-business-one-web-client.jpg"
+      img: "assets/certs/sap-lj-business-one-web-client.jpg",
+      verifyUrl: "https://www.credly.com/badges/adeab842-e0b1-45af-a1a4-cf78ad358782"
     }
   ],
 
